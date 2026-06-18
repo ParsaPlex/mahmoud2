@@ -1472,4 +1472,9 @@ html[dir="rtl"] .footer-column a:hover {
         width: min(100% - 28px, var(--container));
     }
 
-    .header {
+   .header {
+top:12px;
+}
+
+}
+
