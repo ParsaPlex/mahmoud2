@@ -1,203 +1,167 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* =====================================================
+   Raman Network - Main JS
+   Lightweight, debugged, no custom cursor, no preloader
+===================================================== */
+
+(() => {
+  "use strict";
+
   const canvas = document.getElementById("bg-canvas");
   if (!canvas) return;
 
-  const ctx = canvas.getContext("2d");
-  let width = 0;
-  let height = 0;
-  let dpr = 1;
-  let rafId = null;
+  const ctx = canvas.getContext("2d", { alpha: true });
 
-  const rootStyles = getComputedStyle(document.documentElement);
-  const bgColor = rootStyles.getPropertyValue("--bg-soft").trim() || "#080f1f";
-  const accentColor = rootStyles.getPropertyValue("--accent").trim() || "#e3a617";
-  const mutedColor = rootStyles.getPropertyValue("--muted").trim() || "#9aa5b4";
-
-  const pointer = {
-    x: -9999,
-    y: -9999,
-    active: false,
+  const state = {
+    width: 0,
+    height: 0,
+    dpr: Math.min(window.devicePixelRatio || 1, 2),
+    mouseX: 0,
+    mouseY: 0,
+    targetX: 0,
+    targetY: 0,
+    particles: [],
+    lines: []
   };
 
-  const nodes = [];
-  const NODE_COUNT = 46;
-  const MAX_LINK_DISTANCE = 145;
+  const config = {
+    mobile: window.innerWidth < 768,
+    particleCount: window.innerWidth < 768 ? 58 : 105,
+    maxDistance: window.innerWidth < 768 ? 120 : 150,
+    particleRadius: window.innerWidth < 768 ? 1.15 : 1.6,
+    motion: 0.28
+  };
 
-  function parseColor(color) {
-    const el = document.createElement("div");
-    el.style.color = color;
-    document.body.appendChild(el);
-    const rgb = getComputedStyle(el).color;
-    document.body.removeChild(el);
+  function resizeCanvas() {
+    state.width = window.innerWidth;
+    state.height = window.innerHeight;
+    state.dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    const match = rgb.match(/\d+/g);
-    if (!match || match.length < 3) return [255, 255, 255];
-    return match.slice(0, 3).map(Number);
+    canvas.width = Math.floor(state.width * state.dpr);
+    canvas.height = Math.floor(state.height * state.dpr);
+    canvas.style.width = `${state.width}px`;
+    canvas.style.height = `${state.height}px`;
+
+    ctx.setTransform(state.dpr, 0, 0, state.dpr, 0, 0);
   }
 
-  const accentRGB = parseColor(accentColor);
-  const mutedRGB = parseColor(mutedColor);
-
-  function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    width = window.innerWidth;
-    height = window.innerHeight;
-
-    canvas.width = Math.floor(width * dpr);
-    canvas.height = Math.floor(height * dpr);
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
-
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  function rand(min, max) {
+    return Math.random() * (max - min) + min;
   }
 
-  function createNodes() {
-    nodes.length = 0;
+  function createParticles() {
+    state.particles = [];
 
-    const mobile = width < 768;
-    const count = mobile ? 28 : NODE_COUNT;
+    const spreadX = state.width * 0.9;
+    const spreadY = state.height * 0.8;
 
-    for (let i = 0; i < count; i++) {
-      const isAccent = Math.random() > 0.75;
-
-      nodes.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.18,
-        vy: (Math.random() - 0.5) * 0.18,
-        size: 2 + Math.random() * 2.8,
-        phase: Math.random() * Math.PI * 2,
-        colorType: isAccent ? "accent" : "muted",
+    for (let i = 0; i < config.particleCount; i++) {
+      state.particles.push({
+        x: rand(-spreadX * 0.1, spreadX),
+        y: rand(-spreadY * 0.05, spreadY),
+        vx: rand(-0.22, 0.22),
+        vy: rand(-0.16, 0.16),
+        r: rand(config.particleRadius * 0.7, config.particleRadius * 1.35),
+        hue: Math.random() > 0.82 ? "blue" : "gold"
       });
     }
   }
 
   function drawBackground() {
-    ctx.clearRect(0, 0, width, height);
-
-    const gradient = ctx.createLinearGradient(0, 0, 0, height);
-    gradient.addColorStop(0, bgColor);
-    gradient.addColorStop(1, "#050913");
-
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, width, height);
-
-    // soft ambient glow
-    const glow = ctx.createRadialGradient(
-      width * 0.78,
-      height * 0.2,
+    const gradient = ctx.createRadialGradient(
+      state.width * 0.25,
+      state.height * 0.12,
       0,
-      width * 0.78,
-      height * 0.2,
-      Math.max(width, height) * 0.75
+      state.width * 0.25,
+      state.height * 0.12,
+      Math.max(state.width, state.height) * 0.9
     );
-    glow.addColorStop(0, "rgba(227, 166, 23, 0.08)");
-    glow.addColorStop(0.35, "rgba(63, 167, 255, 0.03)");
-    glow.addColorStop(1, "rgba(0, 0, 0, 0)");
 
-    ctx.fillStyle = glow;
-    ctx.fillRect(0, 0, width, height);
+    gradient.addColorStop(0, "rgba(227,166,23,0.08)");
+    gradient.addColorStop(0.55, "rgba(5,9,19,0.18)");
+    gradient.addColorStop(1, "rgba(5,9,19,0.0)");
+
+    ctx.fillStyle = "rgba(5,9,19,0.18)";
+    ctx.fillRect(0, 0, state.width, state.height);
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, state.width, state.height);
   }
 
-  function drawConnections() {
-    for (let i = 0; i < nodes.length; i++) {
-      const a = nodes[i];
+  function drawParticlesAndLines() {
+    const maxDist = config.maxDistance;
+    const maxDistSq = maxDist * maxDist;
 
-      for (let j = i + 1; j < nodes.length; j++) {
-        const b = nodes[j];
-        const dx = a.x - b.x;
-        const dy = a.y - b.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+    for (let i = 0; i < state.particles.length; i++) {
+      const p = state.particles[i];
 
-        if (dist < MAX_LINK_DISTANCE) {
-          const alpha = (1 - dist / MAX_LINK_DISTANCE) * 0.13;
+      p.x += p.vx + state.mouseX * 0.012;
+      p.y += p.vy + state.mouseY * 0.012;
 
-          ctx.strokeStyle = `rgba(${accentRGB[0]}, ${accentRGB[1]}, ${accentRGB[2]}, ${alpha})`;
-          ctx.lineWidth = 1;
+      const pad = 40;
+
+      if (p.x < -pad) p.x = state.width + pad;
+      if (p.x > state.width + pad) p.x = -pad;
+      if (p.y < -pad) p.y = state.height + pad;
+      if (p.y > state.height + pad) p.y = -pad;
+
+      ctx.beginPath();
+      ctx.fillStyle =
+        p.hue === "gold"
+          ? "rgba(240,194,87,0.85)"
+          : "rgba(110,168,255,0.8)";
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+
+      for (let j = i + 1; j < state.particles.length; j++) {
+        const q = state.particles[j];
+        const dx = p.x - q.x;
+        const dy = p.y - q.y;
+        const distSq = dx * dx + dy * dy;
+
+        if (distSq < maxDistSq) {
+          const alpha = 1 - Math.sqrt(distSq) / maxDist;
           ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(227,166,23,${alpha * 0.18})`;
+          ctx.lineWidth = 1;
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
           ctx.stroke();
         }
       }
     }
   }
 
-  function drawNodes(time) {
-    for (const node of nodes) {
-      const pulse = 0.65 + Math.sin(time * 0.001 + node.phase) * 0.12;
-      const isAccent = node.colorType === "accent";
+  function animate() {
+    state.mouseX += (state.targetX - state.mouseX) * 0.04;
+    state.mouseY += (state.targetY - state.mouseY) * 0.04;
 
-      const rgb = isAccent ? accentRGB : mutedRGB;
-      const alpha = isAccent ? 0.88 : 0.7;
-      const size = node.size * (0.9 + pulse * 0.18);
-
-      ctx.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${alpha})`;
-      ctx.fillRect(node.x - size / 2, node.y - size / 2, size, size);
-    }
-  }
-
-  function updateNodes() {
-    for (const node of nodes) {
-      node.x += node.vx;
-      node.y += node.vy;
-
-      // gentle wrap-around
-      if (node.x < -30) node.x = width + 30;
-      if (node.x > width + 30) node.x = -30;
-      if (node.y < -30) node.y = height + 30;
-      if (node.y > height + 30) node.y = -30;
-
-      // soft pointer repulsion
-      if (pointer.active) {
-        const dx = node.x - pointer.x;
-        const dy = node.y - pointer.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const radius = 140;
-
-        if (dist > 0 && dist < radius) {
-          const force = ((radius - dist) / radius) * 0.38;
-          node.x += (dx / dist) * force;
-          node.y += (dy / dist) * force;
-        }
-      }
-    }
-  }
-
-  function animate(time) {
     drawBackground();
-    updateNodes();
-    drawConnections();
-    drawNodes(time);
+    drawParticlesAndLines();
 
-    rafId = requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
   }
-
-  window.addEventListener("resize", () => {
-    resize();
-    createNodes();
-  });
 
   window.addEventListener("mousemove", (e) => {
-    pointer.x = e.clientX;
-    pointer.y = e.clientY;
-    pointer.active = true;
+    const x = (e.clientX / window.innerWidth - 0.5) * 2;
+    const y = (e.clientY / window.innerHeight - 0.5) * 2;
+    state.targetX = x * config.motion;
+    state.targetY = y * config.motion;
   });
 
   window.addEventListener("mouseleave", () => {
-    pointer.active = false;
+    state.targetX = 0;
+    state.targetY = 0;
   });
 
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      if (rafId) cancelAnimationFrame(rafId);
-      rafId = null;
-    } else if (!rafId) {
-      animate(performance.now());
-    }
+  window.addEventListener("resize", () => {
+    resizeCanvas();
+    config.mobile = window.innerWidth < 768;
+    config.particleCount = config.mobile ? 58 : 105;
+    config.maxDistance = config.mobile ? 120 : 150;
+    config.particleRadius = config.mobile ? 1.15 : 1.6;
+    createParticles();
   });
 
-  resize();
-  createNodes();
-  animate(performance.now());
-});
+  resizeCanvas();
+  createParticles();
+  animate();
+})();
