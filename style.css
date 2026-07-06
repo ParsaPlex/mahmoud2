@@ -150,19 +150,11 @@ button{
     color:var(--text);
 }
 
-.nav-menu{
-
-    position:absolute;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    display:flex;
-
-    align-items:center;
-
-    gap:46px;
+.nav-menu a{
+    position:relative;
+    color:rgba(255,255,255,.72);
+    text-decoration:none;
+    transition:color .25s ease;
 }
 
 .nav-menu a::after{
@@ -171,29 +163,34 @@ button{
 
     position:absolute;
 
-    left:0;
+    left:50%;
 
-    bottom:-8px;
+    bottom:-10px;
+
+    transform:translateX(-50%);
 
     width:0;
 
     height:2px;
 
-    border-radius:99px;
+    border-radius:999px;
 
     background:var(--accent);
 
-    transition:.25s;
+    transition:width .28s ease;
+
+}
+
+.nav-menu a:hover{
+
+    color:#fff;
+
 }
 
 .nav-menu a:hover::after{
 
     width:100%;
 
-}
-
-.nav-menu a:hover{
-  color:var(--text);
 }
 
 .nav-cta{
