@@ -3,118 +3,255 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Raman Network - Senior IT Infrastructure & Network Consultant" />
-  <title>Raman Network</title>
+  <title>Raman Network | Enterprise IT Infrastructure</title>
+  <meta name="description" content="Enterprise IT infrastructure, network engineering, server deployment, and secure connectivity solutions." />
+  <meta name="theme-color" content="#0a0e1a" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
   <div class="ambient ambient-one" aria-hidden="true"></div>
   <div class="ambient ambient-two" aria-hidden="true"></div>
 
   <header class="header">
     <div class="container nav">
-      <a class="logo" href="#home" aria-label="Raman Network Home">
-        <span class="logo-text">RAMAN NETWORK</span>
+      <a href="#" class="logo" aria-label="Raman Network Home">
+        <span class="logo-icon">RN</span>
+        <span class="logo-text">Raman <span>Network</span></span>
       </a>
 
-      <nav class="nav-menu" aria-label="Primary navigation">
-        <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#technologies">Technologies</a>
-        <a href="#certificates">Certificates</a>
-        <a class="nav-cta" href="#contact">Contact us</a>
+      <nav class="nav-menu" aria-label="Main navigation">
+        <a href="#services" data-i18n="nav_services">Services</a>
+        <a href="#projects" data-i18n="nav_projects">Projects</a>
+        <a href="#technologies" data-i18n="nav_technologies">Technologies</a>
+        <a href="#certificates" data-i18n="nav_certificates">Certificates</a>
       </nav>
 
-      <button class="mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <div class="nav-actions">
+        <div class="language-toggle" aria-label="Language switcher">
+          <button class="lang-btn active" type="button" data-lang="en">EN</button>
+          <button class="lang-btn" type="button" data-lang="fa">FA</button>
+        </div>
+
+        <a href="#contact" class="nav-cta" data-i18n="nav_contact">Contact us</a>
+
+        <button class="mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <main id="home">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-content">
-          <p class="eyebrow">Senior IT Infrastructure &amp; Network Consultant</p>
-
-          <h1>
-            Enterprise Networking<br />
-            <span>Server Solutions | Cybersecurity | IT Support</span>
+  <main>
+    <section class="hero container">
+      <div class="hero-grid">
+        <div class="hero-content reveal">
+          <p class="eyebrow" data-i18n="hero_eyebrow">Enterprise Network Engineering</p>
+          <h1 data-i18n="hero_title">
+            Reliable Network Infrastructure
+            <span>Built for Modern Organizations.</span>
           </h1>
-
-          <p class="hero-intro">
-            Experienced IT Infrastructure and Network Consultant with over 10 years of experience delivering enterprise networking, server administration, cybersecurity, and technical support solutions for businesses across multiple industries.
+          <p class="hero-description" data-i18n="hero_description">
+            Experienced IT Infrastructure and Network Consultant with over 10 years of experience delivering enterprise networking, cybersecurity, and server administration.
           </p>
 
           <div class="hero-actions">
-            <a class="primary-btn" href="#contact">Start a Conversation</a>
-            <a class="secondary-btn" href="#services">Explore Services</a>
+            <a href="#services" class="primary-btn" data-i18n="hero_primary">Explore services</a>
+            <a href="#certificates" class="secondary-btn" data-i18n="hero_secondary">View certificates</a>
+          </div>
+
+          <div class="hero-metrics">
+            <div class="metric-card reveal">
+              <div class="metric-value">
+                <span class="counter" data-target="10">0</span><span class="metric-plus">+</span>
+              </div>
+              <p data-i18n="metric_years">Years Experience</p>
+            </div>
+
+            <div class="metric-card reveal">
+              <div class="metric-value">
+                <span class="counter" data-target="50">0</span><span class="metric-plus">+</span>
+              </div>
+              <p data-i18n="metric_clients">Business Clients</p>
+            </div>
+
+            <div class="metric-card reveal">
+              <div class="metric-value">
+                <span class="counter" data-target="99">0</span><span class="metric-plus">%</span>
+              </div>
+              <p data-i18n="metric_uptime">Uptime Focus</p>
+            </div>
           </div>
         </div>
 
-        <div class="hero-visual" aria-hidden="true">
-          <div class="orb-shell">
-            <div class="orb-core"></div>
-            <div class="orb-ring ring-one"></div>
-            <div class="orb-ring ring-two"></div>
-            <div class="orb-node node-one"></div>
-            <div class="orb-node node-two"></div>
-            <div class="orb-node node-three"></div>
-          </div>
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="visual-grid">
+            <div class="status-card status-card-top">
+              <span class="status-dot"></span>
+              <span data-i18n="status_secure">Secure Tunnel Active</span>
+            </div>
 
-          <div class="status-card status-card-top">
-            <span class="status-dot"></span>
-            Secure Network Active
-          </div>
+            <div class="visual-panel">
+              <div class="visual-panel-inner">
+                <div class="visual-ring"></div>
+                <div class="visual-ring visual-ring-two"></div>
+                <div class="visual-node visual-node-one"></div>
+                <div class="visual-node visual-node-two"></div>
+                <div class="visual-node visual-node-three"></div>
+                <div class="visual-node visual-node-four"></div>
+              </div>
+            </div>
 
-          <div class="status-card status-card-bottom">
-            <span class="status-dot"></span>
-            Server Health Stable
+            <div class="status-card status-card-bottom">
+              <span class="status-dot green"></span>
+              <span data-i18n="status_health">Server Health Stable</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="services" class="section container">
-      <div class="section-header">
+    <section class="trust-strip container reveal">
+      <div class="trust-item"><span>01</span><p data-i18n="trust_1">Server Infrastructure</p></div>
+      <div class="trust-item"><span>02</span><p data-i18n="trust_2">Network Architecture</p></div>
+      <div class="trust-item"><span>03</span><p data-i18n="trust_3">Branch Connectivity</p></div>
+      <div class="trust-item"><span>04</span><p data-i18n="trust_4">Security Monitoring</p></div>
+    </section>
+
+    <section class="services container" id="services">
+      <div class="section-header reveal">
         <div>
-          <span class="section-kicker">Core Services</span>
-          <h2>Infrastructure services designed for stability, speed and security.</h2>
+          <span class="section-kicker" data-i18n="services_kicker">Core Services</span>
+          <h2 data-i18n="services_title">Infrastructure services designed for stability, speed and security.</h2>
         </div>
-        <p>
-          From server deployment to secure office connectivity, every layer is planned, documented and optimized for long-term reliability.
+        <p data-i18n="services_desc">
+          From server deployment to secure office-to-office connectivity, every layer is planned, documented and optimized for long-term reliability.
         </p>
       </div>
 
       <div class="services-grid">
-        <article class="service-card">
+        <article class="service-card reveal">
           <div class="service-index">01</div>
-          <h3>Server Deployment &amp; Configuration</h3>
-          <p>Enterprise server setup, virtual machines, storage planning and reliable core infrastructure.</p>
+          <div class="service-icon">🔧</div>
+          <h3 data-i18n="svc1_title">Server Deployment & Configuration</h3>
+          <ul>
+            <li data-i18n="svc1_1">Installation of server operating systems including Windows Server and Linux</li>
+            <li data-i18n="svc1_2">Active Directory, DNS and DHCP service deployment</li>
+            <li data-i18n="svc1_3">RAID configuration, backup planning and infrastructure monitoring</li>
+          </ul>
         </article>
 
-        <article class="service-card">
+        <article class="service-card reveal">
           <div class="service-index">02</div>
-          <h3>Network Design &amp; Architecture</h3>
-          <p>Structured network layouts, segmentation, routing strategy and optimized traffic flow.</p>
+          <div class="service-icon">📦</div>
+          <h3 data-i18n="svc2_title">Network Hardware Consulting</h3>
+          <ul>
+            <li data-i18n="svc2_1">Technical requirement analysis and professional hardware recommendations</li>
+            <li data-i18n="svc2_2">Comparison of leading brands such as Cisco, MikroTik and Ubiquiti</li>
+            <li data-i18n="svc2_3">Quotation support, pricing research and equipment planning</li>
+          </ul>
         </article>
 
-        <article class="service-card">
+        <article class="service-card reveal">
           <div class="service-index">03</div>
-          <h3>Cybersecurity &amp; Protection</h3>
-          <p>Secure configurations, access policies, monitoring strategy and threat reduction.</p>
+          <div class="service-icon">🧩</div>
+          <h3 data-i18n="svc3_title">Internal Network Design & Maintenance</h3>
+          <ul>
+            <li data-i18n="svc3_1">Network topology design including Star, Mesh and Hybrid architectures</li>
+            <li data-i18n="svc3_2">Structured cabling, rack installation and patch panel organization</li>
+            <li data-i18n="svc3_3">Documentation, preventive maintenance and lifecycle support</li>
+          </ul>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-index">04</div>
+          <div class="service-icon">🌐</div>
+          <h3 data-i18n="svc4_title">Branch & Office Connectivity</h3>
+          <ul>
+            <li data-i18n="svc4_1">Site-to-Site VPN deployment between offices and branches</li>
+            <li data-i18n="svc4_2">MPLS, IPsec and L2TP-based secure connectivity solutions</li>
+            <li data-i18n="svc4_3">Security monitoring, tunnel health checks and technical support</li>
+          </ul>
         </article>
       </div>
     </section>
+
+    <section class="advantages container" id="technologies">
+      <div class="section-header reveal">
+        <div>
+          <span class="section-kicker" data-i18n="why_kicker">Why Raman Network</span>
+          <h2 data-i18n="why_title">Engineered with operational precision.</h2>
+        </div>
+        <p data-i18n="why_desc">
+          Every design decision is made to reduce friction, improve resilience and keep operations visible and controlled.
+        </p>
+      </div>
+
+      <div class="advantages-grid">
+        <article class="advantage-card reveal">
+          <h3 data-i18n="adv1_title">Performance</h3>
+          <p data-i18n="adv1_desc">Optimized data flow, low-latency routing and structured infrastructure decisions.</p>
+        </article>
+        <article class="advantage-card reveal">
+          <h3 data-i18n="adv2_title">Security</h3>
+          <p data-i18n="adv2_desc">Protected architecture, layered access control and monitoring-first deployment.</p>
+        </article>
+        <article class="advantage-card reveal">
+          <h3 data-i18n="adv3_title">Reliability</h3>
+          <p data-i18n="adv3_desc">Stable operations, proactive maintenance and documented recovery paths.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta-section container reveal" id="contact">
+      <div class="cta-card">
+        <div>
+          <span class="section-kicker" data-i18n="cta_kicker">Demo Landing Page</span>
+          <h2 data-i18n="cta_title">Build a network foundation your organization can depend on.</h2>
+        </div>
+        <a href="mailto:info@ramannetwork.com" class="primary-btn" data-i18n="cta_btn">Start Infrastructure Planning</a>
+      </div>
+    </section>
   </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo footer-logo">
+          <span class="logo-icon">RN</span>
+          <span class="logo-text">Raman <span>Network</span></span>
+        </a>
+        <p data-i18n="footer_brand">
+          Enterprise network engineering for secure, scalable and reliable IT environments.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footer_services">Services</h3>
+        <a href="#services" data-i18n="footer_s1">Server Deployment</a>
+        <a href="#services" data-i18n="footer_s2">Network Consulting</a>
+        <a href="#services" data-i18n="footer_s3">Connectivity Solutions</a>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footer_infra">Infrastructure</h3>
+        <a href="#technologies" data-i18n="footer_i1">Security Monitoring</a>
+        <a href="#technologies" data-i18n="footer_i2">Operational Stability</a>
+        <a href="#certificates" data-i18n="footer_i3">Certificates</a>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Raman Network. All rights reserved.</p>
+    </div>
+  </footer>
 
   <script src="main.js"></script>
 </body>
