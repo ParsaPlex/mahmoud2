@@ -1,426 +1,203 @@
-gsap.registerPlugin(ScrollTrigger);
+document.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.getElementById("bg-canvas");
+  if (!canvas) return;
 
-/* =========================
-   Language System
-========================= */
+  const ctx = canvas.getContext("2d");
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+  let rafId = null;
 
-const translations = {
-    en: {},
-    fa: {}
-};
+  const rootStyles = getComputedStyle(document.documentElement);
+  const bgColor = rootStyles.getPropertyValue("--bg-soft").trim() || "#080f1f";
+  const accentColor = rootStyles.getPropertyValue("--accent").trim() || "#e3a617";
+  const mutedColor = rootStyles.getPropertyValue("--muted").trim() || "#9aa5b4";
 
-function applyLanguage(lang) {
+  const pointer = {
+    x: -9999,
+    y: -9999,
+    active: false,
+  };
 
-    const html = document.documentElement;
+  const nodes = [];
+  const NODE_COUNT = 46;
+  const MAX_LINK_DISTANCE = 145;
 
-    if (lang === "fa") {
-        html.setAttribute("dir", "rtl");
-        html.setAttribute("lang", "fa");
-    } else {
-        html.setAttribute("dir", "ltr");
-        html.setAttribute("lang", "en");
+  function parseColor(color) {
+    const el = document.createElement("div");
+    el.style.color = color;
+    document.body.appendChild(el);
+    const rgb = getComputedStyle(el).color;
+    document.body.removeChild(el);
+
+    const match = rgb.match(/\d+/g);
+    if (!match || match.length < 3) return [255, 255, 255];
+    return match.slice(0, 3).map(Number);
+  }
+
+  const accentRGB = parseColor(accentColor);
+  const mutedRGB = parseColor(mutedColor);
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function createNodes() {
+    nodes.length = 0;
+
+    const mobile = width < 768;
+    const count = mobile ? 28 : NODE_COUNT;
+
+    for (let i = 0; i < count; i++) {
+      const isAccent = Math.random() > 0.75;
+
+      nodes.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: (Math.random() - 0.5) * 0.18,
+        size: 2 + Math.random() * 2.8,
+        phase: Math.random() * Math.PI * 2,
+        colorType: isAccent ? "accent" : "muted",
+      });
     }
+  }
 
-    localStorage.setItem("site-language", lang);
+  function drawBackground() {
+    ctx.clearRect(0, 0, width, height);
 
-    document.querySelectorAll("[data-translate]").forEach(el => {
-        const key = el.dataset.translate;
+    const gradient = ctx.createLinearGradient(0, 0, 0, height);
+    gradient.addColorStop(0, bgColor);
+    gradient.addColorStop(1, "#050913");
 
-        if (translations[lang] && translations[lang][key]) {
-            el.textContent = translations[lang][key];
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+
+    // soft ambient glow
+    const glow = ctx.createRadialGradient(
+      width * 0.78,
+      height * 0.2,
+      0,
+      width * 0.78,
+      height * 0.2,
+      Math.max(width, height) * 0.75
+    );
+    glow.addColorStop(0, "rgba(227, 166, 23, 0.08)");
+    glow.addColorStop(0.35, "rgba(63, 167, 255, 0.03)");
+    glow.addColorStop(1, "rgba(0, 0, 0, 0)");
+
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, width, height);
+  }
+
+  function drawConnections() {
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j];
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < MAX_LINK_DISTANCE) {
+          const alpha = (1 - dist / MAX_LINK_DISTANCE) * 0.13;
+
+          ctx.strokeStyle = `rgba(${accentRGB[0]}, ${accentRGB[1]}, ${accentRGB[2]}, ${alpha})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
         }
-    });
-}
+      }
+    }
+  }
 
-document.querySelectorAll(".lang-btn").forEach(btn => {
+  function drawNodes(time) {
+    for (const node of nodes) {
+      const pulse = 0.65 + Math.sin(time * 0.001 + node.phase) * 0.12;
+      const isAccent = node.colorType === "accent";
 
-    btn.addEventListener("click", () => {
+      const rgb = isAccent ? accentRGB : mutedRGB;
+      const alpha = isAccent ? 0.88 : 0.7;
+      const size = node.size * (0.9 + pulse * 0.18);
 
-        const lang = btn.dataset.lang;
+      ctx.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${alpha})`;
+      ctx.fillRect(node.x - size / 2, node.y - size / 2, size, size);
+    }
+  }
 
-        applyLanguage(lang);
+  function updateNodes() {
+    for (const node of nodes) {
+      node.x += node.vx;
+      node.y += node.vy;
 
-        closePreloader();
-    });
+      // gentle wrap-around
+      if (node.x < -30) node.x = width + 30;
+      if (node.x > width + 30) node.x = -30;
+      if (node.y < -30) node.y = height + 30;
+      if (node.y > height + 30) node.y = -30;
 
-});
+      // soft pointer repulsion
+      if (pointer.active) {
+        const dx = node.x - pointer.x;
+        const dy = node.y - pointer.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const radius = 140;
 
-function closePreloader() {
-
-    const tl = gsap.timeline();
-
-    tl.to(".loader-mark", {
-        scale: 0.82,
-        opacity: 0,
-        duration: 0.35
-    })
-    .to(".loader-text", {
-        opacity: 0,
-        duration: 0.35
-    }, "-=0.2")
-    .to("#preloader", {
-        opacity: 0,
-        duration: 0.6,
-        onComplete: () => {
-
-            const preloader = document.getElementById("preloader");
-
-            if (preloader) {
-                preloader.style.display = "none";
-            }
-
-            document.body.classList.remove("preloader-active");
-            document.body.classList.add("site-loaded");
-
+        if (dist > 0 && dist < radius) {
+          const force = ((radius - dist) / radius) * 0.38;
+          node.x += (dx / dist) * force;
+          node.y += (dy / dist) * force;
         }
-    });
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-
-    const savedLang = localStorage.getItem("site-language");
-
-    if (savedLang) {
-        applyLanguage(savedLang);
-        closePreloader();
+      }
     }
+  }
 
-});
+  function animate(time) {
+    drawBackground();
+    updateNodes();
+    drawConnections();
+    drawNodes(time);
 
-/* safety fallback */
-setTimeout(() => {
+    rafId = requestAnimationFrame(animate);
+  }
 
-    const preloader = document.getElementById("preloader");
+  window.addEventListener("resize", () => {
+    resize();
+    createNodes();
+  });
 
-    if (preloader && preloader.style.display !== "none") {
-        closePreloader();
+  window.addEventListener("mousemove", (e) => {
+    pointer.x = e.clientX;
+    pointer.y = e.clientY;
+    pointer.active = true;
+  });
+
+  window.addEventListener("mouseleave", () => {
+    pointer.active = false;
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = null;
+    } else if (!rafId) {
+      animate(performance.now());
     }
-
-}, 6000);
-
-
-/* =========================
-   Mobile Menu
-========================= */
-
-const menuBtn = document.querySelector(".mobile-menu-btn");
-const mobileMenu = document.querySelector(".mobile-menu");
-
-if (menuBtn && mobileMenu) {
-
-    menuBtn.addEventListener("click", () => {
-
-        menuBtn.classList.toggle("active");
-        mobileMenu.classList.toggle("active");
-
-        document.body.classList.toggle("menu-open");
-
-    });
-
-    mobileMenu.querySelectorAll("a").forEach(link => {
-
-        link.addEventListener("click", () => {
-
-            menuBtn.classList.remove("active");
-            mobileMenu.classList.remove("active");
-            document.body.classList.remove("menu-open");
-
-        });
-
-    });
-
-}
-
-
-/* =========================
-   Three.js Network Background
-========================= */
-
-if (typeof THREE !== "undefined") {
-
-const canvas = document.querySelector("#bg-canvas");
-
-if (canvas) {
-
-const scene = new THREE.Scene();
-
-const camera = new THREE.PerspectiveCamera(
-70,
-window.innerWidth / window.innerHeight,
-0.1,
-1000
-);
-
-camera.position.z = 6;
-
-const renderer = new THREE.WebGLRenderer({
-canvas,
-alpha: true,
-antialias: true,
-powerPreference: "high-performance"
-});
-
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.setSize(window.innerWidth, window.innerHeight);
-
-/* Particle Settings */
-
-const isMobile = window.innerWidth < 768;
-
-const particleCount = isMobile ? 75 : 155;
-const connectionDistance = isMobile ? 1.15 : 1.28;
-const areaSize = isMobile ? 8 : 11;
-
-const particlePositions = new Float32Array(particleCount * 3);
-const particleVelocities = [];
-
-for (let i = 0; i < particleCount; i++) {
-
-const i3 = i * 3;
-
-particlePositions[i3] = (Math.random() - 0.5) * areaSize;
-particlePositions[i3 + 1] = (Math.random() - 0.5) * areaSize;
-particlePositions[i3 + 2] = (Math.random() - 0.5) * areaSize;
-
-particleVelocities.push({
-x: (Math.random() - 0.5) * 0.004,
-y: (Math.random() - 0.5) * 0.004,
-z: (Math.random() - 0.5) * 0.004
-});
-
-}
-
-const particlesGeometry = new THREE.BufferGeometry();
-
-particlesGeometry.setAttribute(
-"position",
-new THREE.BufferAttribute(particlePositions, 3)
-);
-
-const particlesMaterial = new THREE.PointsMaterial({
-color: 0xe3a617,
-size: isMobile ? 0.035 : 0.045,
-transparent: true,
-opacity: 0.82
-});
-
-const particles = new THREE.Points(
-particlesGeometry,
-particlesMaterial
-);
-
-scene.add(particles);
-
-/* Lines */
-
-const maxConnections = particleCount * particleCount;
-const linePositions = new Float32Array(maxConnections * 6);
-
-const linesGeometry = new THREE.BufferGeometry();
-
-linesGeometry.setAttribute(
-"position",
-new THREE.BufferAttribute(linePositions, 3)
-);
-
-linesGeometry.setDrawRange(0, 0);
-
-const linesMaterial = new THREE.LineBasicMaterial({
-color: 0xe3a617,
-transparent: true,
-opacity: 0.12,
-blending: THREE.AdditiveBlending,
-depthWrite: false
-});
-
-const networkLines = new THREE.LineSegments(
-linesGeometry,
-linesMaterial
-);
-
-scene.add(networkLines);
-
-/* Mouse */
-
-const mouse = {
-x: 0,
-y: 0,
-targetX: 0,
-targetY: 0
-};
-
-window.addEventListener("mousemove", e => {
-
-mouse.targetX = (e.clientX / window.innerWidth - 0.5) * 2;
-mouse.targetY = (e.clientY / window.innerHeight - 0.5) * 2;
-
-});
-
-function animateNetwork() {
-
-requestAnimationFrame(animateNetwork);
-
-mouse.x += (mouse.targetX - mouse.x) * 0.045;
-mouse.y += (mouse.targetY - mouse.y) * 0.045;
-
-let vertex = 0;
-let connectionCount = 0;
-
-for (let i = 0; i < particleCount; i++) {
-
-const i3 = i * 3;
-
-particlePositions[i3] += particleVelocities[i].x + mouse.x * 0.0009;
-particlePositions[i3 + 1] += particleVelocities[i].y - mouse.y * 0.0009;
-particlePositions[i3 + 2] += particleVelocities[i].z;
-
-if (particlePositions[i3] > areaSize/2 || particlePositions[i3] < -areaSize/2)
-particleVelocities[i].x *= -1;
-
-if (particlePositions[i3+1] > areaSize/2 || particlePositions[i3+1] < -areaSize/2)
-particleVelocities[i].y *= -1;
-
-if (particlePositions[i3+2] > areaSize/2 || particlePositions[i3+2] < -areaSize/2)
-particleVelocities[i].z *= -1;
-
-for (let j=i+1;j<particleCount;j++){
-
-const j3=j*3;
-
-const dx=particlePositions[i3]-particlePositions[j3];
-const dy=particlePositions[i3+1]-particlePositions[j3+1];
-const dz=particlePositions[i3+2]-particlePositions[j3+2];
-
-const dist=Math.sqrt(dx*dx+dy*dy+dz*dz);
-
-if(dist<connectionDistance){
-
-linePositions[vertex++]=particlePositions[i3];
-linePositions[vertex++]=particlePositions[i3+1];
-linePositions[vertex++]=particlePositions[i3+2];
-
-linePositions[vertex++]=particlePositions[j3];
-linePositions[vertex++]=particlePositions[j3+1];
-linePositions[vertex++]=particlePositions[j3+2];
-
-connectionCount++;
-
-}
-
-}
-
-}
-
-particlesGeometry.attributes.position.needsUpdate=true;
-linesGeometry.attributes.position.needsUpdate=true;
-
-linesGeometry.setDrawRange(0,connectionCount*2);
-
-particles.rotation.y+=0.0009;
-particles.rotation.x+=0.00035;
-
-networkLines.rotation.y=particles.rotation.y;
-networkLines.rotation.x=particles.rotation.x;
-
-renderer.render(scene,camera);
-
-}
-
-animateNetwork();
-
-window.addEventListener("resize",()=>{
-
-camera.aspect=window.innerWidth/window.innerHeight;
-camera.updateProjectionMatrix();
-
-renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-renderer.setSize(window.innerWidth,window.innerHeight);
-
-});
-
-}}
-
-
-
-
-
-
-/* =========================
-   Custom Cursor
-========================= */
-
-const cursorDot=document.querySelector(".cursor-dot");
-const cursorOutline=document.querySelector(".cursor-outline");
-
-if(window.matchMedia("(pointer:fine)").matches){
-
-window.addEventListener("mousemove",(e)=>{
-
-gsap.to(cursorDot,{x:e.clientX,y:e.clientY,duration:0.08});
-gsap.to(cursorOutline,{x:e.clientX,y:e.clientY,duration:0.2});
-
-});
-
-document.querySelectorAll("a,button,.service-card,.advantage-card")
-.forEach(el=>{
-
-el.addEventListener("mouseenter",()=>{
-
-gsap.to(cursorOutline,{
-width:58,
-height:58,
-borderColor:"rgba(227,166,23,0.95)",
-duration:0.2
-});
-
-});
-
-el.addEventListener("mouseleave",()=>{
-
-gsap.to(cursorOutline,{
-width:38,
-height:38,
-borderColor:"rgba(227,166,23,0.65)",
-duration:0.2
-});
-
-});
-
-});
-
-}
-
-
-/* =========================
-   Scroll Reveal
-========================= */
-
-gsap.utils.toArray(".reveal").forEach(el=>{
-
-gsap.to(el,{
-opacity:1,
-y:0,
-duration:0.9,
-ease:"power3.out",
-scrollTrigger:{
-trigger:el,
-start:"top 86%",
-once:true
-}
-});
-
-});
-
-
-/* =========================
-   Demo Mode
-========================= */
-
-document.querySelectorAll("a[href='javascript:void(0)']")
-.forEach(link=>{
-
-link.addEventListener("click",e=>{
-e.preventDefault();
-});
-
+  });
+
+  resize();
+  createNodes();
+  animate(performance.now());
 });
