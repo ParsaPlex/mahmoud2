@@ -104,53 +104,55 @@ button{
     z-index: 1000;
 }
 
-.nav {
-    position: relative;
-    height: 74px;
+.nav{
+    position:relative;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height:74px;
 
-    padding: 0 30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 999px;
+    padding:0 40px;
 
-    background: rgba(5, 9, 19, 0.66);
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:999px;
 
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-
-    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.28);
+    background:rgba(5,9,19,.66);
+    backdrop-filter:blur(24px);
+}
 }
 
-/* Logo */
+.logo{
+    position:absolute;
+    left:35px;
 
-.logo {
-    position: absolute;
-    left: 30px;
-
-    display: flex;
-    align-items: center;
-
-    text-decoration: none;
+    display:flex;
+    align-items:center;
 }
 
-.logo-text {
-    font-family: "Syne", sans-serif;
-    font-size: 18px;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    color: var(--text);
+.logo-text{
+    font-family:"Syne",sans-serif;
+    font-size:18px;
+    font-weight:800;
+    white-space:nowrap;
 }
 
 /* Navigation */
 
-.nav-menu {
-    display: flex;
-    align-items: center;
-    gap: 38px;
+.nav-menu{
+
+    position:absolute;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:42px;
 }
 
 .nav-menu a {
@@ -190,24 +192,21 @@ button{
 
 /* Contact Button */
 
-.nav-menu .nav-cta {
+.nav-menu .nav-cta{
 
-    margin-left: 18px;
+    position:absolute;
 
-    padding: 13px 22px;
+    right:35px;
 
-    border-radius: 999px;
+    padding:13px 24px;
 
-    background: var(--accent);
+    border-radius:999px;
 
-    color: var(--black);
+    background:var(--accent);
 
-    font-size: 13px;
-    font-weight: 700;
+    color:var(--black);
 
-    box-shadow: 0 12px 34px rgba(227,166,23,.22);
-
-    transition: .25s;
+    font-weight:700;
 }
 
 .nav-menu .nav-cta:hover {
