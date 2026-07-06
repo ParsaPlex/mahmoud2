@@ -92,194 +92,101 @@ button{
   background:rgba(25,80,170,0.2);
 }
 
-/* =========================
-   HEADER
-========================= */
-
-.header {
-    position: fixed;
-    top: 18px;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
+/* Header */
+.header{
+  position:fixed;
+  top:18px;
+  left:0;
+  width:100%;
+  z-index:1000;
 }
 
 .nav{
-    position:relative;
-
-    height:74px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:0 40px;
-
-    border:1px solid rgba(255,255,255,.09);
-    border-radius:999px;
-
-    background:rgba(5,9,19,.66);
-    backdrop-filter:blur(24px);
-}
+  height:74px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px 0 22px;
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:999px;
+  background:rgba(5,9,19,0.66);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  box-shadow:0 20px 70px rgba(0,0,0,0.28);
 }
 
 .logo{
-    position:absolute;
-    left:35px;
-
-    display:flex;
-    align-items:center;
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
 }
 
 .logo-text{
-    font-family:"Syne",sans-serif;
-    font-size:18px;
-    font-weight:800;
-    white-space:nowrap;
+  font-family:"Syne",sans-serif;
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:-0.03em;
+  color:#f4f7fb;
 }
-
-/* Navigation */
 
 .nav-menu{
-
-    position:absolute;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    display:flex;
-
-    align-items:center;
-
-    gap:42px;
+  display:flex;
+  align-items:center;
+  gap:34px;
 }
 
-.nav-menu a {
-    position: relative;
-
-    color: var(--muted);
-
-    font-size: 14px;
-    font-weight: 500;
-
-    transition: color .25s ease;
+.nav-menu a{
+  position:relative;
+  color:rgba(255,255,255,0.82);
+  font-size:14px;
+  font-weight:500;
+  transition:color .25s ease;
 }
 
-.nav-menu a:hover {
-    color: var(--text);
+.nav-menu a:hover{
+  color:var(--text);
 }
 
-.nav-menu a::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: -8px;
-
-    width: 0;
-    height: 1px;
-
-    background: var(--accent);
-
-    transition: width .25s ease;
+.nav-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:0 18px;
+  border-radius:999px;
+  background:linear-gradient(135deg, rgba(227,166,23,0.22), rgba(227,166,23,0.08));
+  border:1px solid rgba(227,166,23,0.26);
+  color:var(--text);
+  font-weight:600;
+  font-size:14px;
+  transition:transform .25s ease, border-color .25s ease, background .25s ease;
 }
 
-.nav-menu a:hover::after {
-    width: 100%;
+.nav-cta:hover{
+  transform:translateY(-1px);
+  border-color:rgba(227,166,23,0.42);
+  background:linear-gradient(135deg, rgba(227,166,23,0.28), rgba(227,166,23,0.1));
 }
-
-/* Contact Button */
-
-.nav-menu .nav-cta{
-
-    position:absolute;
-
-    right:35px;
-
-    padding:13px 24px;
-
-    border-radius:999px;
-
-    background:var(--accent);
-
-    color:var(--black);
-
-    font-weight:700;
-}
-
-.nav-menu .nav-cta:hover {
-
-    transform: translateY(-2px);
-
-    box-shadow: 0 18px 42px rgba(227,166,23,.28);
-
-}
-
-.nav-menu .nav-cta::after{
-    display:none;
-}
-
-/* Mobile Button */
 
 .mobile-menu-btn{
-
-    display:none;
-
-    position:absolute;
-
-    right:24px;
-
-    width:44px;
-    height:44px;
-
-    border:1px solid var(--border);
-
-    border-radius:50%;
-
-    background:transparent;
-
-    cursor:pointer;
+  display:none;
+  width:46px;
+  height:46px;
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:50%;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:4px;
+  background:rgba(255,255,255,0.02);
 }
 
 .mobile-menu-btn span{
-
-    display:block;
-
-    width:18px;
-    height:2px;
-
-    margin:4px auto;
-
-    background:var(--text);
-
-    border-radius:999px;
-}
-
-/* =========================
-   Responsive
-========================= */
-
-@media (max-width:991px){
-
-    .nav{
-        justify-content:space-between;
-    }
-
-    .logo{
-        position:static;
-    }
-
-    .nav-menu{
-        display:none;
-    }
-
-    .mobile-menu-btn{
-        display:block;
-        position:static;
-    }
-
+  width:18px;
+  height:2px;
+  border-radius:2px;
+  background:var(--text);
+  opacity:.9;
 }
 
 /* Hero */
