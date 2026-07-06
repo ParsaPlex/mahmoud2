@@ -1,167 +1,145 @@
-/* =====================================================
-   Raman Network - Main JS
-   Lightweight, debugged, no custom cursor, no preloader
-===================================================== */
+/* 
+   GapGPT Debugged Script
+   - Professional Particle System (Canvas 2D)
+   - Smooth Counter Animation
+*/
 
-(() => {
-  "use strict";
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
 
-  const canvas = document.getElementById("bg-canvas");
-  if (!canvas) return;
+let particles = [];
+let mouse = { x: null, y: null, radius: 150 };
 
-  const ctx = canvas.getContext("2d", { alpha: true });
+window.addEventListener('mousemove', (e) => {
+    mouse.x = e.x;
+    mouse.y = e.y;
+});
 
-  const state = {
-    width: 0,
-    height: 0,
-    dpr: Math.min(window.devicePixelRatio || 1, 2),
-    mouseX: 0,
-    mouseY: 0,
-    targetX: 0,
-    targetY: 0,
-    particles: [],
-    lines: []
-  };
+function initCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
 
-  const config = {
-    mobile: window.innerWidth < 768,
-    particleCount: window.innerWidth < 768 ? 58 : 105,
-    maxDistance: window.innerWidth < 768 ? 120 : 150,
-    particleRadius: window.innerWidth < 768 ? 1.15 : 1.6,
-    motion: 0.28
-  };
-
-  function resizeCanvas() {
-    state.width = window.innerWidth;
-    state.height = window.innerHeight;
-    state.dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-    canvas.width = Math.floor(state.width * state.dpr);
-    canvas.height = Math.floor(state.height * state.dpr);
-    canvas.style.width = `${state.width}px`;
-    canvas.style.height = `${state.height}px`;
-
-    ctx.setTransform(state.dpr, 0, 0, state.dpr, 0, 0);
-  }
-
-  function rand(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-
-  function createParticles() {
-    state.particles = [];
-
-    const spreadX = state.width * 0.9;
-    const spreadY = state.height * 0.8;
-
-    for (let i = 0; i < config.particleCount; i++) {
-      state.particles.push({
-        x: rand(-spreadX * 0.1, spreadX),
-        y: rand(-spreadY * 0.05, spreadY),
-        vx: rand(-0.22, 0.22),
-        vy: rand(-0.16, 0.16),
-        r: rand(config.particleRadius * 0.7, config.particleRadius * 1.35),
-        hue: Math.random() > 0.82 ? "blue" : "gold"
-      });
+class Particle {
+    constructor() {
+        this.reset();
     }
-  }
 
-  function drawBackground() {
-    const gradient = ctx.createRadialGradient(
-      state.width * 0.25,
-      state.height * 0.12,
-      0,
-      state.width * 0.25,
-      state.height * 0.12,
-      Math.max(state.width, state.height) * 0.9
-    );
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.baseX = this.x;
+        this.baseY = this.y;
+        this.density = (Math.random() * 30) + 1;
+        this.speedX = (Math.random() * 0.5) - 0.25;
+        this.speedY = (Math.random() * 0.5) - 0.25;
+    }
 
-    gradient.addColorStop(0, "rgba(227,166,23,0.08)");
-    gradient.addColorStop(0.55, "rgba(5,9,19,0.18)");
-    gradient.addColorStop(1, "rgba(5,9,19,0.0)");
+    update() {
+        // Constant movement
+        this.x += this.speedX;
+        this.y += this.speedY;
 
-    ctx.fillStyle = "rgba(5,9,19,0.18)";
-    ctx.fillRect(0, 0, state.width, state.height);
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, state.width, state.height);
-  }
-
-  function drawParticlesAndLines() {
-    const maxDist = config.maxDistance;
-    const maxDistSq = maxDist * maxDist;
-
-    for (let i = 0; i < state.particles.length; i++) {
-      const p = state.particles[i];
-
-      p.x += p.vx + state.mouseX * 0.012;
-      p.y += p.vy + state.mouseY * 0.012;
-
-      const pad = 40;
-
-      if (p.x < -pad) p.x = state.width + pad;
-      if (p.x > state.width + pad) p.x = -pad;
-      if (p.y < -pad) p.y = state.height + pad;
-      if (p.y > state.height + pad) p.y = -pad;
-
-      ctx.beginPath();
-      ctx.fillStyle =
-        p.hue === "gold"
-          ? "rgba(240,194,87,0.85)"
-          : "rgba(110,168,255,0.8)";
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
-
-      for (let j = i + 1; j < state.particles.length; j++) {
-        const q = state.particles[j];
-        const dx = p.x - q.x;
-        const dy = p.y - q.y;
-        const distSq = dx * dx + dy * dy;
-
-        if (distSq < maxDistSq) {
-          const alpha = 1 - Math.sqrt(distSq) / maxDist;
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(227,166,23,${alpha * 0.18})`;
-          ctx.lineWidth = 1;
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(q.x, q.y);
-          ctx.stroke();
+        // Interaction with mouse
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < mouse.radius) {
+            let forceDirectionX = dx / distance;
+            let forceDirectionY = dy / distance;
+            let force = (mouse.radius - distance) / mouse.radius;
+            let directionX = forceDirectionX * force * this.density;
+            let directionY = forceDirectionY * force * this.density;
+            this.x -= directionX;
+            this.y -= directionY;
         }
-      }
+
+        // Screen wrap
+        if (this.x > canvas.width) this.x = 0;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        if (this.y < 0) this.y = canvas.height;
     }
-  }
 
-  function animate() {
-    state.mouseX += (state.targetX - state.mouseX) * 0.04;
-    state.mouseY += (state.targetY - state.mouseY) * 0.04;
+    draw() {
+        ctx.fillStyle = 'rgba(227, 166, 23, 0.4)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
 
-    drawBackground();
-    drawParticlesAndLines();
+function initParticles() {
+    particles = [];
+    let numberOfParticles = (canvas.width * canvas.height) / 8000; // چگالی حرفه‌ای
+    for (let i = 0; i < numberOfParticles; i++) {
+        particles.push(new Particle());
+    }
+}
 
+function connect() {
+    for (let a = 0; a < particles.length; a++) {
+        for (let b = a; b < particles.length; b++) {
+            let dx = particles[a].x - particles[b].x;
+            let dy = particles[a].y - particles[b].y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 100) {
+                let opacity = 1 - (distance / 100);
+                ctx.strokeStyle = `rgba(227, 166, 23, ${opacity * 0.15})`;
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(particles[a].x, particles[a].y);
+                ctx.lineTo(particles[b].x, particles[b].y);
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+    }
+    connect();
     requestAnimationFrame(animate);
-  }
+}
 
-  window.addEventListener("mousemove", (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 2;
-    const y = (e.clientY / window.innerHeight - 0.5) * 2;
-    state.targetX = x * config.motion;
-    state.targetY = y * config.motion;
-  });
+// --- Counter Logic ---
+function startCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        const increment = target / 100; // ملایم بالا رفتن
+        
+        const updateCount = () => {
+            const current = +counter.innerText;
+            if (current < target) {
+                counter.innerText = Math.ceil(current + increment);
+                setTimeout(updateCount, 40);
+            } else {
+                counter.innerText = target;
+            }
+        };
+        updateCount();
+    });
+}
 
-  window.addEventListener("mouseleave", () => {
-    state.targetX = 0;
-    state.targetY = 0;
-  });
+// Run
+window.addEventListener('resize', () => {
+    initCanvas();
+    initParticles();
+});
 
-  window.addEventListener("resize", () => {
-    resizeCanvas();
-    config.mobile = window.innerWidth < 768;
-    config.particleCount = config.mobile ? 58 : 105;
-    config.maxDistance = config.mobile ? 120 : 150;
-    config.particleRadius = config.mobile ? 1.15 : 1.6;
-    createParticles();
-  });
+initCanvas();
+initParticles();
+animate();
 
-  resizeCanvas();
-  createParticles();
-  animate();
-})();
+// اجرای کانتر بعد از لود کامل
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(startCounters, 800);
+});
