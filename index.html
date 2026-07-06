@@ -1,451 +1,87 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Raman Network - Senior IT Infrastructure & Network Consultant" />
+  <title>Raman Network</title>
 
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@500;600;700&display=swap" rel="stylesheet">
 
-<title>Raman Network | Enterprise Network Infrastructure</title>
-
-<meta name="description" content="Enterprise-grade network infrastructure, server deployment, branch connectivity, hardware consulting and secure internal network architecture."/>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
-
-<link rel="stylesheet" href="style.css"/>
-
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-
-<!-- PRELOADER LANGUAGE SELECT -->
-<div id="preloader">
-
-<div class="preloader-inner">
-
-<div class="loader-mark"></div>
-
-<div class="loader-text">RAMAN NETWORK</div>
-
-<div class="loader-line">
-<span></span>
-</div>
-
-<div class="language-select">
-
-<p>Select Language</p>
-
-<div class="lang-buttons">
-
-<button class="lang-btn" data-lang="en">
-English
-</button>
-
-<button class="lang-btn" data-lang="fa">
-فارسی
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- Custom Cursor -->
-<div class="cursor-dot"></div>
-<div class="cursor-outline"></div>
-
-<!-- Three.js Canvas -->
-<canvas id="bg-canvas"></canvas>
-
-<div class="ambient ambient-one"></div>
-<div class="ambient ambient-two"></div>
-
-<!-- HEADER -->
-<header class="header">
-
-<div class="container nav">
-
-<a href="#" class="logo">
-<span class="logo-icon"></span>
-<span class="logo-text">RAMAN<span>NETWORK</span></span>
-</a>
-
-<nav class="nav-menu">
-
-<a href="#">Services</a>
-<a href="#">Infrastructure</a>
-<a href="#">Security</a>
-<a href="#">Contact</a>
-
-</nav>
-
-<a href="#" class="nav-cta magnetic">
-Demo Version
-</a>
-
-<button class="mobile-menu-btn">
-
-<span></span>
-<span></span>
-
-</button>
-
-</div>
-
-</header>
-
-<!-- MOBILE MENU -->
-<div class="mobile-menu">
-
-<a href="#">Services</a>
-<a href="#">Infrastructure</a>
-<a href="#">Security</a>
-<a href="#">Contact</a>
-
-<a href="#" class="mobile-demo-btn">
-Demo Version
-</a>
-
-</div>
-
-<main>
-
-<!-- HERO -->
-<section class="hero container">
-
-<div class="hero-grid">
-
-<div class="hero-content">
-
-<div class="eyebrow reveal">
-<span></span>
-Enterprise Network Engineering
-</div>
-
-<h1 class="reveal">
-
-Reliable Network Infrastructure
-<span>Built for Modern Organizations</span>
-
-</h1>
-
-<p class="hero-description reveal">
-
-Raman Network designs and deploys secure enterprise‑grade infrastructure for organizations that rely on stable connectivity, resilient server environments and controlled data flows.
-
-Modern companies depend on networks that remain reliable under operational pressure. Our approach combines infrastructure planning, hardware consulting and security‑focused architecture to create long‑term stability.
-
-</p>
-
-<div class="hero-actions reveal">
-
-<a href="#" class="primary-btn magnetic">
-Explore Services
-</a>
-
-<a href="#" class="secondary-btn magnetic">
-View Capabilities
-</a>
-
-</div>
-
-<div class="hero-metrics reveal">
-
-<div>
-<strong>24/7</strong>
-<span>Monitoring Ready</span>
-</div>
-
-<div>
-<strong>99.9%</strong>
-<span>Availability Focus</span>
-</div>
-
-<div>
-<strong>Secure</strong>
-<span>By Design</span>
-</div>
-
-</div>
-
-</div>
-
-<div class="hero-visual reveal">
-
-<div class="orb-shell">
-
-<div class="orb-core"></div>
-
-<div class="orb-ring ring-one"></div>
-<div class="orb-ring ring-two"></div>
-
-<div class="orb-node node-one"></div>
-<div class="orb-node node-two"></div>
-<div class="orb-node node-three"></div>
-
-</div>
-
-<div class="status-card status-card-top">
-<span class="status-dot"></span>
-Secure Tunnel Active
-</div>
-
-<div class="status-card status-card-bottom">
-<span class="status-dot"></span>
-Server Health Stable
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- TRUST STRIP -->
-<section class="trust-strip container reveal">
-
-<div class="trust-item">
-<span>01</span>
-Server Infrastructure
-</div>
-
-<div class="trust-item">
-<span>02</span>
-Network Architecture
-</div>
-
-<div class="trust-item">
-<span>03</span>
-Branch Connectivity
-</div>
-
-<div class="trust-item">
-<span>04</span>
-Security Monitoring
-</div>
-
-</section>
-
-<!-- SERVICES -->
-<section class="services container">
-
-<div class="section-header reveal">
-
-<div>
-
-<span class="section-kicker">
-Core Services
-</span>
-
-<h2>
-
-Infrastructure services designed for stability, performance and security.
-
-</h2>
-
-</div>
-
-<p>
-
-Every layer of the network is carefully designed and documented to ensure reliability, scalability and long‑term maintainability.
-
-</p>
-
-</div>
-
-<div class="services-grid">
-
-<article class="service-card reveal">
-
-<div class="service-index">01</div>
-
-<div class="service-icon">🔧</div>
-
-<h3>Server Deployment</h3>
-
-<ul>
-
-<li>Windows Server and Linux deployment</li>
-<li>Active Directory, DNS and DHCP</li>
-<li>Backup and RAID configuration</li>
-
-</ul>
-
-</article>
-
-<article class="service-card reveal">
-
-<div class="service-index">02</div>
-
-<div class="service-icon">📦</div>
-
-<h3>Hardware Consulting</h3>
-
-<ul>
-
-<li>Cisco, MikroTik, Ubiquiti recommendations</li>
-<li>Infrastructure sizing and planning</li>
-<li>Vendor comparison and cost analysis</li>
-
-</ul>
-
-</article>
-
-<article class="service-card reveal">
-
-<div class="service-index">03</div>
-
-<div class="service-icon">🧩</div>
-
-<h3>Internal Network Design</h3>
-
-<ul>
-
-<li>Structured cabling architecture</li>
-<li>Rack installation and patch panels</li>
-<li>Topology design and documentation</li>
-
-</ul>
-
-</article>
-
-<article class="service-card reveal">
-
-<div class="service-index">04</div>
-
-<div class="service-icon">🌐</div>
-
-<h3>Branch Connectivity</h3>
-
-<ul>
-
-<li>Site‑to‑Site VPN</li>
-<li>IPsec and L2TP tunnels</li>
-<li>Secure office communication</li>
-
-</ul>
-
-</article>
-
-</div>
-
-</section>
-
-<!-- CTA -->
-<section class="cta container reveal">
-
-<div class="cta-box">
-
-<span class="section-kicker">
-Demo Landing Page
-</span>
-
-<h2>
-
-Build a network foundation your organization can rely on.
-
-</h2>
-
-<p>
-
-This demo illustrates how Raman Network positions enterprise network infrastructure services with a modern visual identity and scalable architecture.
-
-</p>
-
-<a href="#" class="primary-btn magnetic">
-
-Start Infrastructure Planning
-
-</a>
-
-</div>
-
-</section>
-
-</main>
-
-<!-- FOOTER -->
-<footer class="footer">
-
-<div class="container footer-grid">
-
-<div class="footer-brand">
-
-<a href="#" class="logo">
-
-<span class="logo-icon"></span>
-<span class="logo-text">RAMAN<span>NETWORK</span></span>
-
-</a>
-
-<p>
-
-Enterprise infrastructure, server architecture and secure connectivity for organizations that depend on reliable network operations.
-
-</p>
-
-</div>
-
-<div class="footer-column">
-
-<h4>Services</h4>
-
-<a href="#">Server Deployment</a>
-<a href="#">Network Architecture</a>
-<a href="#">Hardware Consulting</a>
-<a href="#">Branch Connectivity</a>
-
-</div>
-
-<div class="footer-column">
-
-<h4>Infrastructure</h4>
-
-<a href="#">Active Directory</a>
-<a href="#">VPN Connectivity</a>
-<a href="#">Monitoring</a>
-<a href="#">Rack Installation</a>
-
-</div>
-
-<div class="footer-column">
-
-<h4>Company</h4>
-
-<a href="#">About</a>
-<a href="#">Security</a>
-<a href="#">Infrastructure</a>
-<a href="#">Contact</a>
-
-</div>
-
-</div>
-
-<div class="container footer-bottom">
-
-<p>
-© 2026 Raman Network. All rights reserved.
-</p>
-
-<p>
-Designed and coded by <span>ParsaPlex</span>
-</p>
-
-</div>
-
-</footer>
-
-<script defer src="main.js"></script>
-
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+
+  <header class="header">
+    <div class="container nav">
+      <a class="logo" href="#home" aria-label="Raman Network Home">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-text">RAMAN NETWORK</span>
+      </a>
+
+      <nav class="nav-menu" aria-label="Primary navigation">
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#technologies">Technologies</a>
+        <a href="#certificates">Certificates</a>
+        <a class="nav-cta" href="#contact">Contact us</a>
+      </nav>
+
+      <button class="mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <p class="eyebrow">Senior IT Infrastructure &amp; Network Consultant</p>
+
+          <h1>
+            Enterprise Networking<br />
+            <span>Server Solutions | Cybersecurity | IT Support</span>
+          </h1>
+
+          <p class="hero-intro">
+            Experienced IT Infrastructure and Network Consultant with over 10 years of experience delivering enterprise networking, server administration, cybersecurity, and technical support solutions for businesses across multiple industries.
+          </p>
+
+          <div class="hero-actions">
+            <a class="primary-btn" href="#contact">Start a Conversation</a>
+            <a class="secondary-btn" href="#services">Explore Services</a>
+          </div>
+        </div>
+
+        <div class="hero-panel" aria-hidden="true">
+          <div class="stats-card">
+            <div class="stat">
+              <span class="stat-value">10+</span>
+              <span class="stat-label">Years of Experience</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">Enterprise</span>
+              <span class="stat-label">Network &amp; IT Focus</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">24/7</span>
+              <span class="stat-label">Reliable Support</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="main.js"></script>
 </body>
 </html>
