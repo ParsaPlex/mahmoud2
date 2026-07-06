@@ -8,8 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@500;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -21,7 +20,6 @@
   <header class="header">
     <div class="container nav">
       <a class="logo" href="#home" aria-label="Raman Network Home">
-        <span class="logo-mark" aria-hidden="true"></span>
         <span class="logo-text">RAMAN NETWORK</span>
       </a>
 
@@ -62,22 +60,58 @@
           </div>
         </div>
 
-        <div class="hero-panel" aria-hidden="true">
-          <div class="stats-card">
-            <div class="stat">
-              <span class="stat-value">10+</span>
-              <span class="stat-label">Years of Experience</span>
-            </div>
-            <div class="stat">
-              <span class="stat-value">Enterprise</span>
-              <span class="stat-label">Network &amp; IT Focus</span>
-            </div>
-            <div class="stat">
-              <span class="stat-value">24/7</span>
-              <span class="stat-label">Reliable Support</span>
-            </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="orb-shell">
+            <div class="orb-core"></div>
+            <div class="orb-ring ring-one"></div>
+            <div class="orb-ring ring-two"></div>
+            <div class="orb-node node-one"></div>
+            <div class="orb-node node-two"></div>
+            <div class="orb-node node-three"></div>
+          </div>
+
+          <div class="status-card status-card-top">
+            <span class="status-dot"></span>
+            Secure Network Active
+          </div>
+
+          <div class="status-card status-card-bottom">
+            <span class="status-dot"></span>
+            Server Health Stable
           </div>
         </div>
+      </div>
+    </section>
+
+    <section id="services" class="section container">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">Core Services</span>
+          <h2>Infrastructure services designed for stability, speed and security.</h2>
+        </div>
+        <p>
+          From server deployment to secure office connectivity, every layer is planned, documented and optimized for long-term reliability.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-index">01</div>
+          <h3>Server Deployment &amp; Configuration</h3>
+          <p>Enterprise server setup, virtual machines, storage planning and reliable core infrastructure.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-index">02</div>
+          <h3>Network Design &amp; Architecture</h3>
+          <p>Structured network layouts, segmentation, routing strategy and optimized traffic flow.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-index">03</div>
+          <h3>Cybersecurity &amp; Protection</h3>
+          <p>Secure configurations, access policies, monitoring strategy and threat reduction.</p>
+        </article>
       </div>
     </section>
   </main>
