@@ -207,18 +207,15 @@ button{
 
 .nav-cta{
 
-    display:flex;
+    display:inline-flex;
     align-items:center;
     justify-content:center;
 
-    height:40px;
-    min-width:unset;
-
-    padding:0 18px;
+    padding: 8px 13px;
 
     border-radius:999px;
 
-    font-size:15px;
+    font-size:14px;
     font-weight:600;
     line-height:1;
 
