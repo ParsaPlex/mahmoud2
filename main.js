@@ -164,5 +164,4 @@
   resizeCanvas();
   createParticles();
   animate();
-});
 })();
