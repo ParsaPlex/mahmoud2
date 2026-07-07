@@ -144,9 +144,9 @@ button{
 
     color:rgba(255,255,255,.82);
 
-    font-size:14px;
-    font-weight:500;
-
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:.2px;
     transition:color .35s ease;
 }
 
@@ -224,11 +224,6 @@ button{
   transform:translateY(-1px);
   border-color:rgba(227,166,23,0.42);
   background:linear-gradient(135deg, rgba(227,166,23,0.28), rgba(227,166,23,0.1));
-}
-
-.nav-cta::after{
-
-    display:none;
 }
 
 .mobile-menu-btn{
