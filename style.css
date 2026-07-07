@@ -450,63 +450,167 @@ button{
   }
 }
 
-/* ===========================================
-   Premium Hero Counter
-=========================================== */
+/* ================= HERO FLOATING CARDS ================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+.hero-cards{
 
-    const counters = document.querySelectorAll(".counter");
+    position:absolute;
 
-    const observer = new IntersectionObserver((entries) => {
+    top:50%;
 
-        entries.forEach(entry => {
+    right:0;
 
-            if (!entry.isIntersecting) return;
+    transform:translateY(-50%);
 
-            const counter = entry.target;
+    width:340px;
 
-            const target = Number(counter.dataset.target);
+    display:flex;
 
-            const duration = 4000;
+    flex-direction:column;
 
-            const startTime = performance.now();
+    gap:22px;
 
-            function animate(currentTime){
+}
 
-                const elapsed = currentTime - startTime;
+.hero-card{
 
-                const progress = Math.min(elapsed / duration, 1);
+    padding:28px;
 
-                // Ease-Out Cubic
-                const ease = 1 - Math.pow(1 - progress, 3);
+    border-radius:24px;
 
-                counter.textContent = Math.floor(ease * target);
+    background:rgba(255,255,255,.05);
 
-                if(progress < 1){
+    backdrop-filter:blur(22px);
 
-                    requestAnimationFrame(animate);
+    -webkit-backdrop-filter:blur(22px);
 
-                }else{
+    border:1px solid rgba(255,255,255,.08);
 
-                    counter.textContent = target;
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.25);
 
-                }
+}
 
-            }
+.card-status{
 
-            requestAnimationFrame(animate);
+    width:10px;
 
-            observer.unobserve(counter);
+    height:10px;
 
-        });
+    border-radius:50%;
 
-    },{
+    background:#39ff88;
 
-        threshold:0.5
+    display:inline-block;
 
-    });
+    margin-bottom:18px;
 
-    counters.forEach(counter => observer.observe(counter));
+    box-shadow:0 0 15px #39ff88;
 
-});
+}
+
+.hero-card h4{
+
+    font-size:20px;
+
+    font-weight:600;
+
+    margin-bottom:10px;
+
+}
+
+.hero-card p{
+
+    color:#9ca3af;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+}
+
+.card-bottom{
+
+    display:flex;
+
+    justify-content:space-between;
+
+}
+
+.metric h2{
+
+    font-size:46px;
+
+    font-weight:700;
+
+    color:#E3A617;
+
+}
+
+.metric span{
+
+    display:block;
+
+    margin-top:8px;
+
+    color:#9ca3af;
+
+    font-size:14px;
+
+}
+
+/* Floating */
+
+.card-top{
+
+    animation:float1 7s ease-in-out infinite;
+
+}
+
+.card-bottom{
+
+    animation:float2 7s ease-in-out infinite;
+
+}
+
+@keyframes float1{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-10px);
+
+}
+
+}
+
+@keyframes float2{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(10px);
+
+}
+
+}
+
+@media(max-width:992px){
+
+.hero-cards{
+
+display:none;
+
+}
+
+}
