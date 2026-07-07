@@ -306,8 +306,8 @@ button{
   margin:0;
   font-family:"Syne",sans-serif;
   font-size:clamp(2.5rem,5vw,4.8rem);
-  line-height:1.04;
-  letter-spacing:-.04em;
+  line-height:1.15;
+  letter-spacing:-.01em;
   font-weight:700;
   max-width:12ch;
 }
@@ -316,10 +316,10 @@ button{
   display:block;
   margin-top:8px;
   font-family:"Inter",sans-serif;
-  font-size:0.24em;
+  font-size:0.28em;
   line-height:1.5;
   font-weight:400;
-  color:rgba(190, 190, 190, 0.65);;
+  color:rgba(214, 214, 214, 0.72);
   max-width:42ch;
 }
 
