@@ -211,10 +211,10 @@ button{
     align-items:center;
     justify-content:center;
 
-    height:48px;
-    min-width:100px;
+    height:40px;
+    min-width:unset;
 
-    padding:0 25px;
+    padding:0 18px;
 
     border-radius:999px;
 
@@ -230,7 +230,7 @@ button{
         rgba(227,166,23,.08)
     );
 
-    border:1px solid rgba(227,166,23,.28);
+    border:1px solid rgba(227,166,23,.22);
 
     transition:
         transform .35s ease,
