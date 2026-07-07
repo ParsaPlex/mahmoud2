@@ -206,18 +206,45 @@ button{
 }
 
 .nav-cta{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:48px;
-  padding:0 29.5px;
-  border-radius:999px;
-  background:linear-gradient(135deg, rgba(227,166,23,0.22), rgba(227,166,23,0.08));
-  border:1px solid rgba(227,166,23,0.26);
-  color:var(--text);
-  font-weight:600;
-  font-size:14px;
-  transition:transform .25s ease, border-color .25s ease, background .25s ease;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    height:50px;
+    min-width:140px;
+
+    padding:0 28px;
+
+    border-radius:999px;
+
+    font-size:15px;
+    font-weight:600;
+    line-height:1;
+
+    color:#fff;
+
+    background:linear-gradient(
+        135deg,
+        rgba(227,166,23,.22),
+        rgba(227,166,23,.08)
+    );
+
+    border:1px solid rgba(227,166,23,.28);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        background .35s ease;
+}
+
+.nav-cta:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 10px 30px rgba(227,166,23,.18);
+
 }
 
 /* Disable underline animation for Contact button */
