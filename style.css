@@ -135,7 +135,7 @@ button{
     gap:36px;
 }
 
-.nav-menu a{
+.nav-menu a:not(.nav-cta){
     position:relative;
     display:inline-flex;
     align-items:center;
