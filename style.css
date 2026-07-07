@@ -440,7 +440,9 @@ button{
 
 .service-index {
   display: none !important;
-  
+}
+
+
 .service-card h3{
   font-family:"Syne",sans-serif;
   font-size:1.1rem;
@@ -481,7 +483,6 @@ button{
   .services-grid{
     grid-template-columns:1fr;
   }
-}
 
 @media (max-width: 768px){
   .container{
@@ -716,12 +717,6 @@ display:none;
   border-radius:50%;
   background: rgba(57,255,136,.55);
   animation: pulse-dot 1.8s ease-out infinite;
-}
-
-@keyframes pulse-dot{
-  0%{ transform:scale(1); opacity:.85; }
-  70%{ transform:scale(2.8); opacity:0; }
-  100%{ transform:scale(2.8); opacity:0; }
 }
 
 }
