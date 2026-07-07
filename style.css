@@ -313,13 +313,13 @@ button{
 }
 
 .hero h1 span{
-  display:inline-block;
-  margin-top:12px;
+  display:block;
+  margin-top:8px;
   font-family:"Inter",sans-serif;
-  font-size:0.44em;
-  line-height:1.7;
-  font-weight:500;
-  color:#e2c27a;
+  font-size:0.24em;
+  line-height:1.5;
+  font-weight:400;
+  color:rgba(190, 190, 190, 0.65);;
   max-width:42ch;
 }
 
