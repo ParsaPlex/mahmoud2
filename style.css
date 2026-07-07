@@ -144,7 +144,7 @@ button{
 
     color:rgba(255,255,255,.82);
 
-    font-size:14.5px;
+    font-size:15px;
     font-weight:600;
     letter-spacing:.2px;
     transition:color .35s ease;
@@ -210,7 +210,7 @@ button{
   align-items:center;
   justify-content:center;
   min-height:48px;
-  padding:0 28px;
+  padding:0 29.5px;
   border-radius:999px;
   background:linear-gradient(135deg, rgba(227,166,23,0.22), rgba(227,166,23,0.08));
   border:1px solid rgba(227,166,23,0.26);
@@ -218,6 +218,13 @@ button{
   font-weight:600;
   font-size:14px;
   transition:transform .25s ease, border-color .25s ease, background .25s ease;
+}
+
+/* Disable underline animation for Contact button */
+
+.nav-cta::after{
+    display:none !important;
+    content:none;
 }
 
 .nav-cta:hover{
