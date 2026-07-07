@@ -620,3 +620,91 @@ button{
     bottom:48px;
   }
 }
+
+/* Container چیدمان */
+.services-more-container {
+    margin-top: 39px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* استایل دکمه اصلی */
+.more-btn {
+    position: relative;
+    display: inline-block;
+    padding: 22px 50px;
+    font-family: "Syne", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #fff;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 100px;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 1;
+}
+
+/* لایه پس‌زمینه متحرک (افکت پر شدن) */
+.more-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 300%;
+    background: var(--accent); /* همان رنگ طلایی/زرد برندت */
+    transform: translate(-50%, -50%) scale(0) rotate(35deg);
+    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: -1;
+    border-radius: 50%;
+}
+
+/* افکت خط دور دومی (Halo Effect) */
+.more-btn::after {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border: 1px solid var(--accent);
+    border-radius: 100px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* --- حالت Hover --- */
+
+.more-btn:hover {
+    color: #000; /* متن تیره روی پس‌زمینه روشن */
+    border-color: transparent;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.more-btn:hover::before {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    border-radius: 0; /* تبدیل دایره به مستطیل برای پر کردن کل دکمه */
+}
+
+.more-btn:hover::after {
+    opacity: 1;
+    transform: scale(1);
+    inset: -8px; /* ایجاد یک لایه نوری بیرونی */
+}
+
+/* افکت ذرات نوری در اطراف (اختیاری برای حس پریمیوم بیشتر) */
+.more-btn:active {
+    transform: scale(0.95);
+}
+
+/* استایل ریسپانسیو */
+@media (max-width: 768px) {
+    .more-btn {
+        padding: 16px 36px;
+        font-size: 0.9rem;
+    }
+}
