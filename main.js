@@ -164,4 +164,65 @@
   resizeCanvas();
   createParticles();
   animate();
+
+   /* ===========================================
+   Premium Hero Counter
+=========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const counters = document.querySelectorAll(".counter");
+
+    const observer = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+            if (!entry.isIntersecting) return;
+
+            const counter = entry.target;
+
+            const target = Number(counter.dataset.target);
+
+            const duration = 4000;
+
+            const startTime = performance.now();
+
+            function animate(currentTime){
+
+                const elapsed = currentTime - startTime;
+
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Ease-Out Cubic
+                const ease = 1 - Math.pow(1 - progress, 3);
+
+                counter.textContent = Math.floor(ease * target);
+
+                if(progress < 1){
+
+                    requestAnimationFrame(animate);
+
+                }else{
+
+                    counter.textContent = target;
+
+                }
+
+            }
+
+            requestAnimationFrame(animate);
+
+            observer.unobserve(counter);
+
+        });
+
+    },{
+
+        threshold:0.5
+
+    });
+
+    counters.forEach(counter => observer.observe(counter));
+
+});
 })();
