@@ -92,7 +92,9 @@ button{
   background:rgba(25,80,170,0.2);
 }
 
-/* Header */
+/* ==========================================================================
+   Header & Nav
+   ========================================================================== */
 .header{
   position:fixed;
   top:18px;
@@ -177,39 +179,70 @@ button{
   width:100%;
 }
 
-.nav-cta{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:10px 16px;
-  border-radius:999px;
-  font-size:14px;
-  font-weight:550;
-  line-height:1;
-  color:#fff;
-  background:linear-gradient(
-    135deg,
-    rgba(227,166,23,.22),
-    rgba(227,166,23,.08)
-  );
-  border:1px solid rgba(227,166,23,.22);
-  transition:
-    transform .35s ease,
-    box-shadow .35s ease,
-    background .35s ease,
-    border-color .35s ease;
+/* Contact Us Button: ست شده بر اساس هاور افکت دکمه‌های More-btn */
+.nav-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(227, 166, 23, 0.35);
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 1;
 }
 
-.nav-cta::after{
-  display:none !important;
-  content:none;
+.nav-cta::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 300%;
+  background: var(--accent);
+  transform: translate(-50%, -50%) scale(0) rotate(35deg);
+  transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: -1;
+  border-radius: 50%;
 }
 
-.nav-cta:hover{
-  transform:translateY(-1px);
-  border-color:rgba(227,166,23,0.42);
-  background:linear-gradient(135deg, rgba(227,166,23,0.28), rgba(227,166,23,0.1));
-  box-shadow:0 10px 30px rgba(227,166,23,.18);
+.nav-cta::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.nav-cta:hover {
+  color: #000 !important;
+  border-color: transparent;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(227, 166, 23, 0.25);
+}
+
+.nav-cta:hover::before {
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  border-radius: 0;
+}
+
+.nav-cta:hover::after {
+  opacity: 1;
+  transform: scale(1);
+  inset: -5px;
+}
+
+.nav-cta:active {
+  transform: scale(0.96);
 }
 
 .mobile-menu-btn{
@@ -233,12 +266,14 @@ button{
   opacity:.9;
 }
 
-/* Hero */
+/* ==========================================================================
+   Hero Section & Buttons
+   ========================================================================== */
 .hero{
   min-height:100vh;
   display:flex;
   align-items:center;
-  padding:100px 0 80px;
+  padding:120px 0 80px;
   position:relative;
   z-index:1;
 }
@@ -291,41 +326,102 @@ button{
 .hero-actions{
   display:flex;
   flex-wrap:wrap;
-  gap:14px;
+  gap:16px;
   margin-top:34px;
 }
 
-.primary-btn,
-.secondary-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:52px;
-  padding:0 22px;
-  border-radius:999px;
-  transition:transform .25s ease, background .25s ease, border-color .25s ease;
-  will-change:transform;
+/* Hero Button: Primary (View Services) - رنگ طلایی با افکت درخشش هاور */
+.primary-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f0b72f, #d08f08);
+  color: #0e1116;
+  font-weight: 700;
+  font-size: 15px;
+  border: 1px solid transparent;
+  box-shadow: 0 12px 30px rgba(227, 166, 23, 0.22);
+  overflow: hidden;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
 }
 
-.primary-btn{
-  background:linear-gradient(135deg, #f0b72f, #d08f08);
-  color:#0e1116;
-  font-weight:700;
-  box-shadow:0 18px 40px rgba(227,166,23,0.22);
+.primary-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transition: none;
+  z-index: -1;
 }
 
-.secondary-btn{
-  border:1px solid rgba(255,255,255,0.12);
-  color:var(--text);
-  background:rgba(255,255,255,0.03);
+.primary-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(227, 166, 23, 0.4);
 }
 
-.primary-btn:hover,
-.secondary-btn:hover{
-  transform:translateY(-2px);
+.primary-btn:hover::before {
+  left: 100%;
+  transition: left 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Hero visual */
+/* Hero Button: Secondary (View Certificates) - افکت گلس مدرن با انیمیشن درخشش مرزها */
+.secondary-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  padding: 0 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-weight: 600;
+  font-size: 15px;
+  overflow: hidden;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              background 0.3s ease, 
+              border-color 0.3s ease;
+}
+
+.secondary-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.secondary-btn:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.secondary-btn:hover::before {
+  opacity: 1;
+}
+
+/* Hero visual & Floating Cards */
 .hero-visual{
   position:relative;
   min-height:520px;
@@ -335,7 +431,6 @@ button{
   z-index:1;
 }
 
-/* HERO FLOATING CARDS */
 .hero-cards{
   position:absolute;
   top:50%;
@@ -379,18 +474,9 @@ button{
 }
 
 @keyframes pulse-dot{
-  0%{
-    transform:scale(1);
-    opacity:0.75;
-  }
-  70%{
-    transform:scale(2.6);
-    opacity:0;
-  }
-  100%{
-    transform:scale(2.6);
-    opacity:0;
-  }
+  0%{ transform:scale(1); opacity:0.75; }
+  70%{ transform:scale(2.6); opacity:0; }
+  100%{ transform:scale(2.6); opacity:0; }
 }
 
 .hero-card h4{
@@ -425,48 +511,36 @@ button{
   font-size:14px;
 }
 
-.card-top{
-  animation:float1 7s ease-in-out infinite;
-}
-
-.card-bottom{
-  animation:float2 7s ease-in-out infinite;
-}
+.card-top{ animation:float1 7s ease-in-out infinite; }
+.card-bottom{ animation:float2 7s ease-in-out infinite; }
 
 @keyframes float1{
-  0%,100%{
-    transform:translateY(0);
-  }
-  50%{
-    transform:translateY(-10px);
-  }
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-10px); }
 }
-
 @keyframes float2{
-  0%,100%{
-    transform:translateY(0);
-  }
-  50%{
-    transform:translateY(10px);
-  }
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(10px); }
 }
 
-/* Sections */
-.section{
-  padding:20px 0 90px;
+/* ==========================================================================
+   Section Headers (تماما متوازن، هم‌اندازه و هم‌راستا)
+   ========================================================================== */
+.section {
+  padding: 100px 0;
 }
 
-.section-header{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:24px;
-  margin-bottom:28px;
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 30px;
 }
 
-.section-kicker{
-  display:inline-block;
-  margin-bottom:10px;
+.section-kicker {
+  display: inline-block;
+  margin-bottom: 3px;
   color:#f0c257;
   font-size:.85rem;
   font-weight:700;
@@ -474,237 +548,336 @@ button{
   text-transform:uppercase;
 }
 
-.section-header h2{
-  font-family:"Syne",sans-serif;
-  font-size:clamp(1.7rem,3vw,2.75rem);
-  line-height:1.1;
-  max-width:14ch;
+.section-header h2 {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  line-height: 1.15;
+  font-weight: 800;
+  margin: 0;
 }
 
-.section-header p{
-  max-width:54ch;
-  color:var(--muted);
-  line-height:1.8;
+.section-header p {
+  max-width: 50ch;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.8;
+  margin: 0;
 }
 
-.services-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:18px;
-}
-
-.service-card{
-  padding:28px;
-  border-radius:var(--radius);
-  background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-  border:1px solid var(--border);
-  box-shadow:0 22px 55px rgba(0,0,0,0.22);
-  min-height:160px;
-}
-
-.service-index{
-  display:none !important;
-}
-
-.service-card h3{
-  font-family:"Syne",sans-serif;
-  font-size:1.1rem;
-  margin-bottom:12px;
-}
-
-.service-card p{
-  color:var(--muted);
-  line-height:1.75;
-}
-
-@keyframes spin{
-  from{ transform:translate(-50%,-50%) rotate(0deg); }
-  to{ transform:translate(-50%,-50%) rotate(360deg); }
-}
-
-@keyframes spinReverse{
-  from{ transform:translate(-50%,-50%) rotate(360deg); }
-  to{ transform:translate(-50%,-50%) rotate(0deg); }
-}
-
-/* Responsive */
-@media (max-width:1024px){
-  .hero-grid{
-    grid-template-columns:1fr;
-    gap:34px;
-  }
-
-  .hero-visual{
-    min-height:420px;
-  }
-
-  .hero-cards{
-    position:relative;
-    top:auto;
-    right:auto;
-    transform:none;
-    width:100%;
-    max-width:420px;
-    margin:0 auto;
-  }
-
-  .section-header{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .services-grid{
-    grid-template-columns:1fr;
-  }
-}
-
-@media (max-width:768px){
-  .container{
-    width:min(100% - 28px, var(--container));
-  }
-
-  .header{
-    top:12px;
-  }
-
-  .nav{
-    height:66px;
-    padding:0 14px 0 18px;
-  }
-
-  .nav-menu{
-    display:none;
-  }
-
-  .mobile-menu-btn{
-    display:flex;
-  }
-
-  .hero{
-    padding:120px 0 60px;
-  }
-
-  .hero h1{
-    max-width:100%;
-  }
-
-  .hero-visual{
-    min-height:360px;
-  }
-
-  .hero-cards{
-    display:none;
-  }
-
-  .orb-shell{
-    width:min(360px, 90vw);
-  }
-
-  .ring-one{
-    width:220px;
-    height:220px;
-  }
-
-  .ring-two{
-    width:300px;
-    height:300px;
-  }
-
-  .status-card-top{
-    right:2px;
-    top:44px;
-  }
-
-  .status-card-bottom{
-    left:0;
-    bottom:48px;
-  }
-}
-
-/* Container چیدمان */
-.services-more-container {
-    margin-top: 39px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* ==========================================================================
+   Services Section & Grid
+   ========================================================================== */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* ایجاد ۳ ستون دقیق و مساوی */
+    gap: 24px; /* فاصله بین کارت‌ها */
     width: 100%;
+    align-items: stretch; /* هم‌قد کردن تمام کارت‌ها در ردیف */
 }
 
-/* استایل دکمه اصلی */
+.service-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 200px;
+  padding: 36px 32px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  overflow: hidden;
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1), 
+              border-color 0.45s cubic-bezier(0.23, 1, 0.32, 1), 
+              box-shadow 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.01)
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+.service-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.service-index {
+  display: none !important;
+}
+
+.service-card h3 {
+  font-family: "Syne", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.service-card p {
+  color: var(--muted);
+  line-height: 1.75;
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   Projects Section & Grid (تراز با هدر و کارت‌های خدمات)
+   ========================================================================== */
+.projects {
+  padding: 100px 0;
+}
+
+.projects .section-header {
+  margin-top: 10px;
+  margin-bottom: 30px; /* فاصله مناسب و نزدیک به کارت‌ها */
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch; /* هم‌قد و الاین شدن کامل کارت‌های پروژه */
+}
+
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 250px;
+  padding: 36px 32px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  overflow: hidden;
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1), 
+              border-color 0.45s cubic-bezier(0.23, 1, 0.32, 1), 
+              box-shadow 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.01)
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card h3 {
+  margin: 0 0 14px;
+  font-family: "Syne", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #ffffff;
+}
+
+.project-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   More Buttons ("View All" buttons)
+   ========================================================================== */
+.services-more-container,
+.projects-more-container {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .more-btn {
-    position: relative;
-    display: inline-block;
-    padding: 22px 50px;
-    font-family: "Syne", sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #fff;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 100px;
-    overflow: hidden;
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    z-index: 1;
+  position: relative;
+  display: inline-block;
+  padding: 20px 48px;
+  font-family: "Syne", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 1;
 }
 
-/* لایه پس‌زمینه متحرک (افکت پر شدن) */
 .more-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 150%;
-    height: 300%;
-    background: var(--accent); /* همان رنگ طلایی/زرد برندت */
-    transform: translate(-50%, -50%) scale(0) rotate(35deg);
-    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-    z-index: -1;
-    border-radius: 50%;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 300%;
+  background: var(--accent);
+  transform: translate(-50%, -50%) scale(0) rotate(35deg);
+  transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: -1;
+  border-radius: 50%;
 }
 
-/* افکت خط دور دومی (Halo Effect) */
 .more-btn::after {
-    content: '';
-    position: absolute;
-    inset: -5px;
-    border: 1px solid var(--accent);
-    border-radius: 100px;
-    opacity: 0;
-    transform: scale(0.8);
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border: 1px solid var(--accent);
+  border-radius: 100px;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
-
-/* --- حالت Hover --- */
 
 .more-btn:hover {
-    color: #000; /* متن تیره روی پس‌زمینه روشن */
-    border-color: transparent;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  color: #000 !important;
+  border-color: transparent;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .more-btn:hover::before {
-    transform: translate(-50%, -50%) scale(1) rotate(0deg);
-    border-radius: 0; /* تبدیل دایره به مستطیل برای پر کردن کل دکمه */
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  border-radius: 0;
 }
 
 .more-btn:hover::after {
-    opacity: 1;
-    transform: scale(1);
-    inset: -8px; /* ایجاد یک لایه نوری بیرونی */
+  opacity: 1;
+  transform: scale(1);
+  inset: -8px;
 }
 
-/* افکت ذرات نوری در اطراف (اختیاری برای حس پریمیوم بیشتر) */
 .more-btn:active {
-    transform: scale(0.95);
+  transform: scale(0.95);
 }
 
-/* استایل ریسپانسیو */
+/* ==========================================================================
+   Responsive & Adaptive (تبلت، موبایل، لپ‌تاپ)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .hero-visual {
+    min-height: 400px;
+  }
+
+  .hero-cards {
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: none;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .services-grid,
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* تبلت ۲ ستونه */
+    gap: 20px;
+  }
+}
+
 @media (max-width: 768px) {
-    .more-btn {
-        padding: 16px 36px;
-        font-size: 0.9rem;
-    }
+  .container {
+    width: min(100% - 32px, var(--container));
+  }
+
+  .header {
+    top: 12px;
+  }
+
+  .nav {
+    height: 66px;
+    padding: 0 14px 0 18px;
+  }
+
+  .nav-menu {
+    display: none; /* همبرگری موبایل با جاوا اسکریپت هندل می‌شود */
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .hero {
+    padding: 130px 0 60px;
+  }
+
+  .hero-visual {
+    min-height: 320px;
+  }
+
+  .hero-cards {
+    display: none;
+  }
+
+  .services-grid,
+  .projects-grid {
+    grid-template-columns: 1fr; /* موبایل تک ستونه */
+    gap: 16px;
+  }
+
+  .service-card,
+  .project-card {
+    padding: 28px 24px;
+    min-height: auto;
+  }
+
+  .more-btn {
+    padding: 16px 36px;
+    font-size: 0.9rem;
+  }
 }
