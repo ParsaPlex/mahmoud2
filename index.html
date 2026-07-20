@@ -1,183 +1,1041 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Raman Network - Senior IT Infrastructure & Network Consultant" />
-  <title>Raman Network</title>
+    <meta charset="UTF-8" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
+
+    <meta
+        name="description"
+        content="Raman Network provides enterprise networking, server administration, cybersecurity, virtualization, VoIP, and professional IT support solutions."
+    />
+
+    <meta
+        name="theme-color"
+        content="#050913"
+    />
+
+    <title>Raman Network | IT Infrastructure & Network Consultant</title>
+
+    <!-- Google Fonts -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    />
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+        rel="stylesheet"
+    />
+
+    <!-- Swiper Styles -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <!-- Main Styles -->
+    <link
+        rel="stylesheet"
+        href="style.css"
+    />
 </head>
-<body>
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
-  <div class="ambient ambient-one" aria-hidden="true"></div>
-  <div class="ambient ambient-two" aria-hidden="true"></div>
+<body id="home">
 
-  <header class="header">
-    <div class="container nav">
-      <a class="logo" href="#home" aria-label="Raman Network Home">
-        <span class="logo-text">RAMAN NETWORK</span>
-      </a>
+    <!-- Background Canvas -->
+    <canvas
+        id="bg-canvas"
+        aria-hidden="true"
+    ></canvas>
 
-      <nav class="nav-menu" aria-label="Primary navigation">
-        <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#technologies">Technologies</a>
-        <a href="#certificates">Certificates</a>
-        <a class="nav-cta" href="#contact">Contact us</a>
-      </nav>
+    <!-- Ambient Background Elements -->
+    <div
+        class="ambient ambient-one"
+        aria-hidden="true"
+    ></div>
 
-      <button class="mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </header>
+    <div
+        class="ambient ambient-two"
+        aria-hidden="true"
+    ></div>
 
-  <main id="home">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-content">
-          <p class="eyebrow">Senior IT Infrastructure &amp; Network Consultant</p>
+    <!-- Custom Cursor -->
+    <div
+        class="cursor-dot"
+        aria-hidden="true"
+    ></div>
 
-          <h1>
-            Enterprise Networking<br />
-            <span>Server Solutions | Cybersecurity | IT Support</span>
-          </h1>
+    <div
+        class="cursor-outline"
+        aria-hidden="true"
+    ></div>
 
-          <p class="hero-intro">
-            Experienced IT Infrastructure and Network Consultant with over 10 years of experience delivering enterprise networking, server administration, cybersecurity, and technical support solutions for businesses across multiple industries.
-          </p>
+    <!-- Site Header -->
+    <header class="header">
+        <div class="container nav">
 
-          <div class="hero-actions">
-            <a class="primary-btn" href="#services">View Services</a>
-            <a class="secondary-btn" href="#Certificates">View Certificates</a>
-          </div>
+            <!-- Brand Logo -->
+            <a
+                class="logo"
+                href="#home"
+                aria-label="Go to the Raman Network home section"
+            >
+                <span class="logo-text">RAMAN NETWORK</span>
+            </a>
 
-        
-      </div>
-            <!-- Right Side -->
-            <div class="hero-visual">
-                <div class="hero-cards">
-                    <div class="hero-card card-top">
-                        <span class="card-status"></span>
-                        <h4>Available for New Projects</h4>
+            <!-- Primary Navigation -->
+            <nav
+                class="nav-menu"
+                id="primary-navigation"
+                aria-label="Primary navigation"
+            >
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#projects">Projects</a>
+                <a href="#technologies">Technologies</a>
+                <a href="#certificates">Certificates</a>
+
+                <a
+                    class="nav-cta magnetic"
+                    href="#contact"
+                >
+                    Contact Us
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button
+                class="mobile-menu-btn"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-controls="primary-navigation"
+                aria-expanded="false"
+            >
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
+
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-grid">
+
+                <!-- Hero Content -->
+                <div class="hero-content">
+                    <p class="eyebrow">
+                        Senior IT Infrastructure &amp; Network Consultant
+                    </p>
+
+                    <h1>
+                        Enterprise Networking
+                        <br />
+
+                        <span>
+                            Server Solutions | Cybersecurity | IT Support
+                        </span>
+                    </h1>
+
+                    <p class="hero-intro">
+                        Experienced IT Infrastructure and Network Consultant
+                        with over 10 years of experience delivering enterprise
+                        networking, server administration, cybersecurity, and
+                        technical support solutions for businesses across
+                        multiple industries.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a
+                            class="primary-btn magnetic"
+                            href="#services"
+                        >
+                            View Services
+                        </a>
+
+                        <a
+                            class="secondary-btn magnetic"
+                            href="#certificates"
+                        >
+                            View Certificates
+                        </a>
                     </div>
-                    <div class="hero-card card-bottom">
-                        <div class="metric">
-                            <h2>10+</h2>
-                            <span>Years Experience</span>
+                </div>
+
+                <!-- Hero Visual -->
+                <div class="hero-visual">
+                    <div class="hero-cards">
+
+                        <div class="hero-card card-top">
+                            <span
+                                class="card-status"
+                                aria-hidden="true"
+                            ></span>
+
+                            <h4>Available for New Projects</h4>
                         </div>
-                        <div class="metric">
-                            <h2>50+</h2>
-                            <span>Business Clients</span>
+
+                        <div class="hero-card card-bottom">
+                            <div class="metric">
+                                <h2>10+</h2>
+                                <span>Years Experience</span>
+                            </div>
+
+                            <div class="metric">
+                                <h2>50+</h2>
+                                <span>Business Clients</span>
+                            </div>
                         </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section
+            class="section container"
+            id="services"
+        >
+            <div class="section-header">
+                <div>
+                    <span class="section-kicker">
+                        Core Services
+                    </span>
+
+                    <h2>
+                        Professional IT Infrastructure Solutions
+                    </h2>
+                </div>
+            </div>
+
+            <div class="services-grid">
+
+                <!-- Service 01 -->
+                <article class="service-card">
+                    <div class="service-index">01</div>
+
+                    <h3>
+                        Server Deployment &amp; Configuration
+                    </h3>
+
+                    <p>
+                        Enterprise server setup, virtual machines, storage
+                        planning, and reliable core infrastructure.
+                    </p>
+                </article>
+
+                <!-- Service 02 -->
+                <article class="service-card">
+                    <div class="service-index">02</div>
+
+                    <h3>
+                        Network Design &amp; Architecture
+                    </h3>
+
+                    <p>
+                        Structured network layouts, segmentation, routing
+                        strategy, and optimized traffic flow.
+                    </p>
+                </article>
+
+                <!-- Service 03 -->
+                <article class="service-card">
+                    <div class="service-index">03</div>
+
+                    <h3>
+                        Cybersecurity &amp; Protection
+                    </h3>
+
+                    <p>
+                        Secure configurations, access policies, monitoring
+                        strategy, and threat reduction.
+                    </p>
+                </article>
+
+                <!-- Service 04 -->
+                <article class="service-card">
+                    <div class="service-index">04</div>
+
+                    <h3>
+                        Cloud &amp; Virtualization
+                    </h3>
+
+                    <p>
+                        Scalable cloud solutions, VMware, Hyper-V, and
+                        efficient virtualization management.
+                    </p>
+                </article>
+
+                <!-- Service 05 -->
+                <article class="service-card">
+                    <div class="service-index">05</div>
+
+                    <h3>
+                        IT Support &amp; Maintenance
+                    </h3>
+
+                    <p>
+                        Proactive system monitoring, helpdesk services, and
+                        ongoing IT maintenance.
+                    </p>
+                </article>
+
+                <!-- Service 06 -->
+                <article class="service-card">
+                    <div class="service-index">06</div>
+
+                    <h3>
+                        VoIP Solutions
+                    </h3>
+
+                    <p>
+                        Modern telephony systems, unified communications, and
+                        call center integration.
+                    </p>
+                </article>
+
+            </div>
+
+            <div class="services-more-container">
+                <a
+                    href="services.html"
+                    class="more-btn magnetic"
+                >
+                    View All Services
+                </a>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section
+            class="projects container"
+            id="projects"
+        >
+            <div class="section-header reveal">
+                <div>
+                    <span class="section-kicker">
+                        Our Projects
+                    </span>
+
+                    <h2>
+                        Selected Infrastructure Projects
+                    </h2>
+                </div>
+
+                <p>
+                    Reliable, secure, and scalable technology solutions
+                    designed for modern business environments.
+                </p>
+            </div>
+
+            <div class="projects-grid">
+
+                <!-- Project 01 -->
+                <article class="project-card reveal">
+                    <h3>
+                        Enterprise Network Deployment
+                    </h3>
+
+                    <p>
+                        A high-performance network design built for
+                        scalability, redundancy, and maximum throughput
+                        across multiple corporate sites.
+                    </p>
+                </article>
+
+                <!-- Project 02 -->
+                <article class="project-card reveal">
+                    <h3>
+                        Server Infrastructure Modernization
+                    </h3>
+
+                    <p>
+                        Transitioning legacy workloads to modern hybrid
+                        architectures, improving reliability, resource
+                        allocation, and boot speeds.
+                    </p>
+                </article>
+
+                <!-- Project 03 -->
+                <article class="project-card reveal">
+                    <h3>
+                        Cybersecurity Implementation
+                    </h3>
+
+                    <p>
+                        Deploying zero-trust access controls, real-time threat
+                        intelligence, and end-to-end encryption protocols to
+                        secure critical assets.
+                    </p>
+                </article>
+
+            </div>
+
+            <div class="projects-more-container">
+                <a
+                    href="projects.html"
+                    class="more-btn magnetic"
+                >
+                    View All Projects
+                </a>
+            </div>
+        </section>
+
+        <!-- Technologies Section -->
+        <section
+            class="technologies"
+            id="technologies"
+        >
+            <div class="container">
+
+                <div class="section-header tech-header">
+                    <div>
+                        <span class="section-kicker">
+                            Technologies
+                        </span>
+
+                        <h2>
+                            Enterprise Platforms &amp; Technologies
+                        </h2>
+                    </div>
+
+                    <p>
+                        Trusted technologies for secure, scalable, and
+                        high-performance IT infrastructure.
+                    </p>
+                </div>
+
+                <!-- Technologies Slider -->
+                <div class="swiper techSwiper">
+                    <div class="swiper-wrapper">
+
+                        <!-- Cisco -->
+                        <div class="swiper-slide">
+                            <div class="tech-card">
+                                <div
+                                    class="shine"
+                                    aria-hidden="true"
+                                ></div>
+
+                                <img
+                                    src="cisco.svg"
+                                    alt="Cisco"
+                                    loading="lazy"
+                                />
+                            </div>
+                        </div>
+
+                        <!-- MikroTik -->
+                        <div class="swiper-slide">
+                            <div class="tech-card">
+                                <div
+                                    class="shine"
+                                    aria-hidden="true"
+                                ></div>
+
+                                <img
+                                    src="mikrotik.svg"
+                                    alt="MikroTik"
+                                    loading="lazy"
+                                />
+                            </div>
+                        </div>
+
+                        <!-- Microsoft -->
+                        <div class="swiper-slide">
+                            <div class="tech-card">
+                                <div
+                                    class="shine"
+                                    aria-hidden="true"
+                                ></div>
+
+                                <img
+                                    src="microsoft.svg"
+                                    alt="Microsoft"
+                                    loading="lazy"
+                                />
+                            </div>
+                        </div>
+
+                        <!-- VMware -->
+                        <div class="swiper-slide">
+                            <div class="tech-card">
+                                <div
+                                    class="shine"
+                                    aria-hidden="true"
+                                ></div>
+
+                                <img
+                                    src="vmware.svg"
+                                    alt="VMware"
+                                    loading="lazy"
+                                />
+                            </div>
+                        </div>
+
+                        <!-- Fortinet -->
+                        <div class="swiper-slide">
+                            <div class="tech-card">
+                                <div
+                                    class="shine"
+                                    aria-hidden="true"
+                                ></div>
+
+                                <img
+                                    src="fortinet.svg"
+                                    alt="Fortinet"
+                                    loading="lazy"
+                                />
+                            </div>
+                        </div>
+
+                        <!-- Ubiquiti -->
+                        <div class="swiper-slide">
+                            <div class="tech-card">
+                                <div
+                                    class="shine"
+                                    aria-hidden="true"
+                                ></div>
+
+                                <img
+                                    src="ubiquiti.svg"
+                                    alt="Ubiquiti"
+                                    loading="lazy"
+                                />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Certificates Section -->
+        <section
+            class="certificates-section container"
+            id="certificates"
+        >
+            <div class="section-header">
+                <div>
+                    <span class="section-subtitle">
+                        Achievements
+                    </span>
+
+                    <h2 class="section-title">
+                        Professional Certificates
+                    </h2>
+                </div>
+            </div>
+
+            <div class="cert-grid">
+
+                <!-- MikroTik Certificates -->
+                <article class="cert-card">
+                    <h3 class="cert-vendor">
+                        MikroTik
+                    </h3>
+
+                    <div class="cert-badges-container">
+                        <img
+                            src="assets/certs/mtcna.png"
+                            alt="MikroTik Certified Network Associate"
+                            class="cert-badge-img"
+                            loading="lazy"
+                        />
+
+                        <img
+                            src="assets/certs/mtcre.png"
+                            alt="MikroTik Certified Routing Engineer"
+                            class="cert-badge-img"
+                            loading="lazy"
+                        />
+
+                        <img
+                            src="assets/certs/mtcwe.png"
+                            alt="MikroTik Certified Wireless Engineer"
+                            class="cert-badge-img"
+                            loading="lazy"
+                        />
+                    </div>
+                </article>
+
+                <!-- Microsoft Certificates -->
+                <article class="cert-card">
+                    <h3 class="cert-vendor">
+                        Microsoft
+                    </h3>
+
+                    <div class="cert-badges-container">
+                        <img
+                            src="assets/certs/mcsa.png"
+                            alt="Microsoft Certified Solutions Associate"
+                            class="cert-badge-img"
+                            loading="lazy"
+                        />
+
+                        <img
+                            src="assets/certs/mcse.png"
+                            alt="Microsoft Certified Solutions Expert"
+                            class="cert-badge-img"
+                            loading="lazy"
+                        />
+                    </div>
+                </article>
+
+                <!-- Cisco Certificates -->
+                <article class="cert-card">
+                    <h3 class="cert-vendor">
+                        Cisco
+                    </h3>
+
+                    <div class="cert-badges-container">
+                        <img
+                            src="assets/certs/ccna.png"
+                            alt="Cisco Certified Network Associate"
+                            class="cert-badge-img"
+                            loading="lazy"
+                        />
+
+                        <img
+                            src="assets/certs/ccnp.png"
+                            alt="Cisco Certified Network Professional"
+                            class="cert-badge-img"
+                            loading="lazy"
+                        />
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Premium Footer -->
+    <footer
+        class="footer"
+        id="contact"
+    >
+        <div
+            class="footer-glow footer-glow-left"
+            aria-hidden="true"
+        ></div>
+
+        <div
+            class="footer-glow footer-glow-right"
+            aria-hidden="true"
+        ></div>
+
+        <div class="container footer-container">
+
+            <!-- Footer CTA -->
+            <div class="footer-cta">
+                <div class="footer-cta-content">
+                    <span class="footer-eyebrow">
+                        <span
+                            class="footer-status-dot"
+                            aria-hidden="true"
+                        ></span>
+
+                        Available for new projects
+                    </span>
+
+                    <h2>
+                        Let’s build a smarter network.
+                    </h2>
+
+                    <p>
+                        Reliable infrastructure, secure connectivity and
+                        professional network solutions designed for modern
+                        organizations.
+                    </p>
+                </div>
+
+                <a
+                    href="mailto:smahmoudsa@gmail.com?subject=Project%20Inquiry%20-%20Raman%20Network"
+                    class="footer-cta-button magnetic"
+                    aria-label="Start a project with Raman Network"
+                >
+                    <span>Start a Project</span>
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <path d="M5 12h14"></path>
+                        <path d="m13 6 6 6-6 6"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Main Footer Content -->
+            <div class="footer-main">
+
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <a
+                        href="#home"
+                        class="logo footer-logo"
+                        aria-label="Go to the Raman Network home section"
+                    >
+                        <span
+                            class="logo-icon"
+                            aria-hidden="true"
+                        ></span>
+
+                        <span class="logo-text">
+                            RAMAN<span>NETWORK</span>
+                        </span>
+                    </a>
+
+                    <p class="footer-description">
+                        Enterprise network infrastructure, secure connectivity
+                        and server deployment solutions built for performance,
+                        scalability and long-term reliability.
+                    </p>
+
+                    <div class="footer-trust">
+                        <span
+                            class="footer-trust-icon"
+                            aria-hidden="true"
+                        >
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 3 5 6v5c0 4.8 2.8 8.3 7 10 4.2-1.7 7-5.2 7-10V6l-7-3Z"></path>
+                                <path d="m9 12 2 2 4-4"></path>
+                            </svg>
+                        </span>
+
+                        <span>
+                            <strong>
+                                Professional Network Solutions
+                            </strong>
+
+                            Secure. Reliable. Scalable.
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-column">
+                    <h3>Expertise</h3>
+
+                    <ul class="footer-links">
+                        <li>
+                            <a href="#services">
+                                <span>Server Deployment</span>
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M5 12h14"></path>
+                                    <path d="m13 6 6 6-6 6"></path>
+                                </svg>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#services">
+                                <span>Network Design</span>
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M5 12h14"></path>
+                                    <path d="m13 6 6 6-6 6"></path>
+                                </svg>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#services">
+                                <span>Security Solutions</span>
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M5 12h14"></path>
+                                    <path d="m13 6 6 6-6 6"></path>
+                                </svg>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#services">
+                                <span>IT Infrastructure</span>
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M5 12h14"></path>
+                                    <path d="m13 6 6 6-6 6"></path>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="footer-column footer-contact-column">
+                    <h3>Contact Information</h3>
+
+                    <div class="footer-contact-list">
+
+                        <!-- Name -->
+                        <div class="footer-contact-item">
+                            <span
+                                class="footer-contact-icon"
+                                aria-hidden="true"
+                            >
+                                <svg viewBox="0 0 24 24">
+                                    <circle
+                                        cx="12"
+                                        cy="8"
+                                        r="4"
+                                    ></circle>
+
+                                    <path d="M4.5 21a7.5 7.5 0 0 1 15 0"></path>
+                                </svg>
+                            </span>
+
+                            <div>
+                                <span class="footer-contact-label">
+                                    Contact Person
+                                </span>
+
+                                <strong>Mahmoud Sadi</strong>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <a
+                            href="mailto:smahmoudsa@gmail.com"
+                            class="footer-contact-item footer-contact-link"
+                            aria-label="Send an email to Mahmoud Sadi"
+                        >
+                            <span
+                                class="footer-contact-icon"
+                                aria-hidden="true"
+                            >
+                                <svg viewBox="0 0 24 24">
+                                    <rect
+                                        x="3"
+                                        y="5"
+                                        width="18"
+                                        height="14"
+                                        rx="2"
+                                    ></rect>
+
+                                    <path d="m3 7 9 6 9-6"></path>
+                                </svg>
+                            </span>
+
+                            <span class="footer-contact-content">
+                                <span class="footer-contact-label">
+                                    Email Address
+                                </span>
+
+                                <strong>
+                                    smahmoudsa@gmail.com
+                                </strong>
+                            </span>
+
+                            <svg
+                                class="footer-contact-arrow"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path d="M5 12h14"></path>
+                                <path d="m13 6 6 6-6 6"></path>
+                            </svg>
+                        </a>
+
+                        <!-- LinkedIn -->
+                        <a
+                            href="https://www.linkedin.com/in/mahmoud-sadi-99a969363"
+                            class="footer-contact-item footer-contact-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Visit Mahmoud Sadi on LinkedIn"
+                        >
+                            <span
+                                class="footer-contact-icon"
+                                aria-hidden="true"
+                            >
+                                <svg viewBox="0 0 24 24">
+                                    <rect
+                                        x="3"
+                                        y="3"
+                                        width="18"
+                                        height="18"
+                                        rx="4"
+                                    ></rect>
+
+                                    <path d="M8 10v7"></path>
+                                    <path d="M8 7v.01"></path>
+                                    <path d="M12 17v-4a3 3 0 0 1 6 0v4"></path>
+                                    <path d="M12 10v7"></path>
+                                </svg>
+                            </span>
+
+                            <span class="footer-contact-content">
+                                <span class="footer-contact-label">
+                                    Professional Network
+                                </span>
+
+                                <strong>LinkedIn Profile</strong>
+                            </span>
+
+                            <svg
+                                class="footer-contact-arrow"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path d="M5 12h14"></path>
+                                <path d="m13 6 6 6-6 6"></path>
+                            </svg>
+                        </a>
+
+                        <!-- WhatsApp -->
+                        <div
+                            class="footer-contact-item footer-contact-disabled"
+                            aria-label="WhatsApp Business is available on request"
+                        >
+                            <span
+                                class="footer-contact-icon"
+                                aria-hidden="true"
+                            >
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"></path>
+                                    <path d="M9 8.5c.5 2.5 2 4 4.5 5"></path>
+                                </svg>
+                            </span>
+
+                            <div>
+                                <span class="footer-contact-label">
+                                    WhatsApp Business
+                                </span>
+
+                                <strong>Available on Request</strong>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    &copy;
+                    <span id="current-year">2026</span>
+
+                    <strong>Raman Network.</strong>
+                    All rights reserved.
+                </p>
+
+                <div class="footer-signature">
+                    <span
+                        class="signature-line"
+                        aria-hidden="true"
+                    ></span>
+
+                    <span class="signature-label">
+                        Designed By
+                    </span>
+
+                    <a
+                        href="#home"
+                        class="signature-name"
+                        aria-label="Designed by Parsa Met"
+                    >
+                        Parsa Met
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path d="m9 18 6-6-6-6"></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <a
+                    href="#home"
+                    class="footer-back-top"
+                    aria-label="Back to the top of the page"
+                >
+                    <span>Back to top</span>
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <path d="M12 19V5"></path>
+                        <path d="m6 11 6-6 6 6"></path>
+                    </svg>
+                </a>
+            </div>
+
         </div>
-    
-</section>
+    </footer>
 
-    <section id="services" class="section container">
-  <div class="section-header">
-    <div>
-      <span class="section-kicker">Core Services</span>
-      <h2></h2>
-    </div>
+    <!-- JavaScript Dependencies -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+        defer
+    ></script>
 
-  </div>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        defer
+    ></script>
 
-      
-  <div class="services-grid">
-    <article class="service-card">
-      <div class="service-index">01</div>
-      <h3>Server Deployment &amp; Configuration</h3>
-      <p>Enterprise server setup, virtual machines, storage planning and reliable core infrastructure.</p>
-    </article>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+        defer
+    ></script>
 
-    <article class="service-card">
-      <div class="service-index">02</div>
-      <h3>Network Design &amp; Architecture</h3>
-      <p>Structured network layouts, segmentation, routing strategy and optimized traffic flow.</p>
-    </article>
+    <script
+        src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+        defer
+    ></script>
 
-    <article class="service-card">
-      <div class="service-index">03</div>
-      <h3>Cybersecurity &amp; Protection</h3>
-      <p>Secure configurations, access policies, monitoring strategy and threat reduction.</p>
-    </article>
+    <!-- Main JavaScript -->
+    <script
+        src="main.js"
+        defer
+    ></script>
 
-    <article class="service-card">
-      <div class="service-index">04</div>
-      <h3>Cloud &amp; Virtualization</h3>
-      <p>Scalable cloud solutions, VMWare, Hyper-V, and efficient virtualization management.</p>
-    </article>
+    <!-- Footer Utilities -->
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            const currentYear = document.getElementById("current-year");
 
-    <article class="service-card">
-      <div class="service-index">05</div>
-      <h3>IT Support &amp; Maintenance</h3>
-      <p>Proactive system monitoring, helpdesk services, and ongoing IT maintenance.</p>
-    </article>
+            if (currentYear) {
+                currentYear.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
 
-    <article class="service-card">
-      <div class="service-index">06</div>
-      <h3>VoIP Solutions</h3>
-      <p>Modern telephony systems, unified communications, and call center integration.</p>
-    </article>
-  </div>
-      <div class="services-more-container">
-  <a href="services.html" class="more-btn">View All Services</a>
-</div>
-      
-      <!-- Projects -->
-<section class="projects container">
-    <div class="section-header reveal">
-        <span class="section-kicker">Our Projects</span>
-        <h2></h2>
-        <p></p>
-    </div>
-
-    <div class="projects-grid">
-        <!-- Project 1 -->
-        <article class="project-card reveal">
-            <h3>Enterprise Network Deployment</h3>
-            <p>
-                A high-performance network design built for scalability, redundancy, and maximum throughput across multiple corporate sites.
-            </p>
-        </article>
-
-        <!-- Project 2 -->
-        <article class="project-card reveal">
-            <h3>Server Infrastructure Modernization</h3>
-            <p>
-                Transitioning legacy workloads to modern hybrid architectures, improving reliability, resource allocation, and boot speeds.
-            </p>
-        </article>
-
-        <!-- Project 3 -->
-        <article class="project-card reveal">
-            <h3>Cybersecurity Implementation</h3>
-            <p>
-                Deploying zero-trust access controls, real-time threat intelligence, and end-to-end encryption protocols to secure critical assets.
-            </p>
-        </article>
-    </div>
-
-    <div class="projects-more-container">
-        <a href="projects.html" class="more-btn magnetic">View All Projects </a>
-    </div>
-</section>
-
-     
-</section>
-  </main>
-
-  <script src="main.js"></script>
 </body>
 </html>
